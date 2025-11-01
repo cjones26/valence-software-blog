@@ -33,13 +33,18 @@ interface PaginationProps {
   onSearchPageChange?: (page: number) => void;
 }
 
-const buttonClass = "px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors";
-
-function Pagination({ currentPage, totalPages, isSearchMode, onSearchPageChange }: PaginationProps) {
+function Pagination({
+  currentPage,
+  totalPages,
+  isSearchMode,
+  onSearchPageChange,
+}: PaginationProps) {
   const prevPage = currentPage - 1;
   const nextPage = currentPage + 1;
   const isPrevDisabled = currentPage === 1;
   const isNextDisabled = currentPage === totalPages;
+  const navButtonClass =
+    'px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors';
 
   return (
     <div className="flex justify-center items-center gap-2 mt-12">
@@ -47,14 +52,16 @@ function Pagination({ currentPage, totalPages, isSearchMode, onSearchPageChange 
         <button
           onClick={() => onSearchPageChange?.(prevPage)}
           disabled={isPrevDisabled}
-          className={`${buttonClass} disabled:opacity-50 disabled:cursor-not-allowed`}
+          className={`${navButtonClass} disabled:opacity-50 disabled:cursor-not-allowed`}
         >
           Previous
         </button>
       ) : (
         <Link
           href={currentPage === 2 ? '/' : `/page/${prevPage}`}
-          className={`${buttonClass} ${isPrevDisabled ? 'opacity-50 pointer-events-none' : ''}`}
+          className={`${navButtonClass} ${
+            isPrevDisabled ? 'opacity-50 pointer-events-none' : ''
+          }`}
         >
           Previous
         </Link>
@@ -68,14 +75,16 @@ function Pagination({ currentPage, totalPages, isSearchMode, onSearchPageChange 
         <button
           onClick={() => onSearchPageChange?.(nextPage)}
           disabled={isNextDisabled}
-          className={`${buttonClass} disabled:opacity-50 disabled:cursor-not-allowed`}
+          className={`${navButtonClass} disabled:opacity-50 disabled:cursor-not-allowed`}
         >
           Next
         </button>
       ) : (
         <Link
           href={`/page/${nextPage}`}
-          className={`${buttonClass} ${isNextDisabled ? 'opacity-50 pointer-events-none' : ''}`}
+          className={`${navButtonClass} ${
+            isNextDisabled ? 'opacity-50 pointer-events-none' : ''
+          }`}
         >
           Next
         </Link>
@@ -93,7 +102,6 @@ export default function BlogList({
   onSearchPageChange,
   onClearSearch,
 }: BlogListProps) {
-
   return (
     <main className="flex-1 max-w-3xl mx-auto px-4 py-6 md:px-6 md:py-8 w-full">
       {searchQuery && (
@@ -106,7 +114,7 @@ export default function BlogList({
         {posts.length > 0 ? (
           posts.map((post, index) => (
             <React.Fragment key={post.url}>
-              <PostCard post={post} />
+              <PostCard post={post} index={index} />
               {index < posts.length - 1 && (
                 <hr className="border-0 border-t border-blue-200 dark:border-slate-700 my-8" />
               )}
@@ -137,7 +145,14 @@ export default function BlogList({
         )}
       </div>
 
-      {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} isSearchMode={isSearchMode} onSearchPageChange={onSearchPageChange} />}
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          isSearchMode={isSearchMode}
+          onSearchPageChange={onSearchPageChange}
+        />
+      )}
     </main>
   );
 }

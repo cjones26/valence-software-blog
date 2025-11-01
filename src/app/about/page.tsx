@@ -17,7 +17,7 @@ export default function AboutPage() {
             width={400}
             height={400}
             className="rounded-3xl"
-            priority
+            preload
             quality={100}
           />
         </div>

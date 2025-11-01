@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
+import { useState } from 'react';
 import Tag from './Tag';
 
 export interface PostCardProps {
@@ -14,9 +17,11 @@ export interface PostCardProps {
     cover?: string;
     blurDataURL?: string;
   };
+  index: number;
 }
 
-export default function PostCard({ post }: PostCardProps) {
+export default function PostCard({ post, index }: PostCardProps) {
+  const [imageLoaded, setImageLoaded] = useState(false);
   const formattedDate = format(new Date(post.date), 'MMMM d, yyyy');
   const validTags = post.tags.filter((tag): tag is string =>
     Boolean(tag && typeof tag === 'string')
@@ -25,16 +30,28 @@ export default function PostCard({ post }: PostCardProps) {
   return (
     <article className="mb-0">
       {post.cover && (
-        <Link href={post.url} className="block mb-3 relative aspect-[2/1] overflow-hidden rounded-lg">
+        <Link
+          href={post.url}
+          className="block mb-3 relative aspect-2/1 overflow-hidden rounded-lg"
+        >
           <Image
             src={post.cover}
             alt={post.title}
             fill
+            sizes="(max-width: 768px) calc(100vw - 2rem), 768px"
             className="object-cover hover:scale-105 transition-transform duration-300"
-            unoptimized
-            priority={false}
-            placeholder={post.blurDataURL ? 'blur' : 'empty'}
+            style={index === 0 ? undefined : {
+              opacity: imageLoaded ? 1 : 0,
+              transition: 'opacity 0.3s ease-in-out'
+            }}
+            placeholder="blur"
             blurDataURL={post.blurDataURL}
+            onLoad={() => setImageLoaded(true)}
+            {...(index === 0 && { preload: true })}
+            {...(index !== 0 && { loading: index === 1 ? 'eager' : 'lazy' })}
+            {...(index !== 0 && {
+              fetchPriority: index === 1 ? 'high' : 'auto',
+            })}
           />
         </Link>
       )}

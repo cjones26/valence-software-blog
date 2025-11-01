@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   turbopack: {},
+  images: {
+    qualities: [75, 90],
+  },
 };
 
 export default withContentlayer(nextConfig);

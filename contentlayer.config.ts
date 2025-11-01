@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm'
 import fs from 'fs'
 import path from 'path'
 import { getPlaiceholder } from 'plaiceholder'
+import sharp from 'sharp'
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -41,7 +42,7 @@ export const Post = defineDocumentType(() => ({
   computedFields: {
     coverImage: {
       type: 'string',
-      resolve: (post) => {
+      resolve: async (post) => {
         if (!post.cover) return undefined
 
         // If it's already a public path (starts with /), return as-is
@@ -58,21 +59,32 @@ export const Post = defineDocumentType(() => ({
         if (pathParts.length >= 2) {
           const year = pathParts[0]
           const slug = pathParts[1]
-          const ext = path.extname(post.cover)
-          const publicPath = `/posts/${year}/${slug}/cover${ext}`
+          // Always use .webp extension for optimized images
+          const publicPath = `/posts/${year}/${slug}/cover.webp`
           const publicFilePath = path.join('public', publicPath)
 
-          // Copy image to public folder
+          // Optimize and convert image to WebP
           try {
             const publicDir = path.dirname(publicFilePath)
             if (!fs.existsSync(publicDir)) {
               fs.mkdirSync(publicDir, { recursive: true })
             }
             if (fs.existsSync(coverSourcePath)) {
-              fs.copyFileSync(coverSourcePath, publicFilePath)
+              await sharp(coverSourcePath)
+                .resize(1200, null, {
+                  withoutEnlargement: true,
+                  fit: 'inside'
+                })
+                .webp({
+                  quality: 85,
+                  effort: 6  // 0-6, higher = better compression but slower
+                })
+                .toFile(publicFilePath)
+
+              console.log(`Optimized cover image: ${publicPath}`)
             }
           } catch (error) {
-            console.error(`Failed to copy cover image for ${post.title}:`, error)
+            console.error(`Failed to optimize cover image for ${post.title}:`, error)
           }
 
           return publicPath

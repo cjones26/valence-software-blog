@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import { allPosts } from 'contentlayer/generated';
 import { format } from 'date-fns';
 import Layout from '@/components/Layout';
 import Comments from '@/components/Comments';
 import MDXContent from '@/components/MDXContent';
 import Tag from '@/components/Tag';
+import PostCoverImage from '@/components/PostCoverImage';
 
 interface PostPageProps {
   params: Promise<{
@@ -34,16 +34,11 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <Layout>
       {post.coverImage && (
-        <div className="relative aspect-2/1 overflow-hidden rounded-lg mb-8">
-          <Image
-            src={post.coverImage}
-            alt={post.title}
-            fill
-            className="object-cover"
-            unoptimized
-            priority
-          />
-        </div>
+        <PostCoverImage
+          src={post.coverImage}
+          alt={post.title}
+          blurDataURL={post.blurDataURL}
+        />
       )}
 
       <div className="mb-8">
