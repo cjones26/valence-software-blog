@@ -8,34 +8,54 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <Layout layoutSource="about">
-      <article>
+    <Layout>
+      <article className="prose dark:prose-invert">
         <div className="flex justify-center mb-8">
           <Image
             src="/profile-image-large.jpg"
-            alt="About Charles Jones"
+            alt="Charles Jones"
             width={400}
             height={400}
             className="rounded-3xl"
             priority
+            quality={100}
           />
         </div>
+
+        <h1 className="text-center">About</h1>
+
         <p>
-          Hello, my name is Charles Jones and I am a software engineer who currently resides in Charlotte, North
-          Carolina.
+          I'm Charles Jones, a software engineer based in Charlotte, North
+          Carolina. I've spent my career building systems that solve actual
+          problems—from infrastructure automation to full-stack applications.
         </p>
+
         <p>
-          My fascination with computers began all the way back in 1994, when my father brought home a 486DX running
-          MS-DOS 6.0. I began working with HTML in the late &lsquo;90s, tinkering away in Notepad before publishing to
-          GeoCities and Tripod.
+          My path into software started in 1994 with a 486DX and MS-DOS 6.0. By
+          the late '90s, I was hand-coding HTML in Notepad and publishing to
+          GeoCities. Those early experiments taught me that the best way to
+          learn is to build something and put it online.
         </p>
+
         <p>
-          Shortly thereafter, my interests moved toward desktop applications and I began developing in VB6 before my
-          introduction to C# and the .NET world (thanks <a href="https://www.runuo.com">RunUO</a>). After working for
-          a Managed Services provider from 2008 to 2013, I finally embraced my passion for development and began a
-          full-time career in the field, specifically the JavaScript / Node.js ecosystem.
+          I moved from desktop applications in VB6 to C# and .NET (shoutout to
+          the <a href="https://www.runuo.com">RunUO</a> community for the
+          introduction). After five years managing IT infrastructure at a
+          managed services provider, I shifted focus entirely to software
+          development in 2013, specializing in JavaScript and Node.js.
         </p>
-        <p>I currently work for a Fortune 500 company as a Senior Software Engineer.</p>
+
+        <p>
+          Today, I work as a Staff Software Engineer at an online bank. This
+          blog exists to document solutions to problems I've encountered, share
+          what I've learned, and hopefully save someone else a few hours of
+          debugging.
+        </p>
+
+        <p className="text-sm text-gray-600 dark:text-gray-400 italic">
+          All opinions and technical takes here are my own and don't represent
+          my employer.
+        </p>
       </article>
     </Layout>
   );

@@ -3,6 +3,8 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import remarkGfm from 'remark-gfm'
+import fs from 'fs'
+import path from 'path'
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -30,8 +32,54 @@ export const Post = defineDocumentType(() => ({
       type: 'string',
       required: false,
     },
+    cover: {
+      type: 'string',
+      required: false,
+    },
   },
   computedFields: {
+    coverImage: {
+      type: 'string',
+      resolve: (post) => {
+        if (!post.cover) return undefined
+
+        // If it's already a public path (starts with /), return as-is
+        if (post.cover.startsWith('/')) {
+          return post.cover
+        }
+
+        // Handle relative paths (./cover.jpg or cover.jpg)
+        const postDir = path.dirname(post._raw.sourceFilePath)
+        const coverSourcePath = path.join('content/posts', postDir, post.cover)
+
+        // Create public destination path based on post slug
+        const pathParts = post._raw.flattenedPath.split('/')
+        if (pathParts.length >= 2) {
+          const year = pathParts[0]
+          const slug = pathParts[1]
+          const ext = path.extname(post.cover)
+          const publicPath = `/posts/${year}/${slug}/cover${ext}`
+          const publicFilePath = path.join('public', publicPath)
+
+          // Copy image to public folder
+          try {
+            const publicDir = path.dirname(publicFilePath)
+            if (!fs.existsSync(publicDir)) {
+              fs.mkdirSync(publicDir, { recursive: true })
+            }
+            if (fs.existsSync(coverSourcePath)) {
+              fs.copyFileSync(coverSourcePath, publicFilePath)
+            }
+          } catch (error) {
+            console.error(`Failed to copy cover image for ${post.title}:`, error)
+          }
+
+          return publicPath
+        }
+
+        return post.cover
+      },
+    },
     slug: {
       type: 'string',
       resolve: (post) => {
@@ -67,6 +115,21 @@ export const Post = defineDocumentType(() => ({
           return `/${year}/${month}/${day}/${slug}`
         }
         return `/${post._raw.flattenedPath}`
+      },
+    },
+    excerpt: {
+      type: 'string',
+      resolve: (post) => {
+        // Extract first 250 characters from content, stripping markdown
+        const content = post.body.raw
+        const text = content
+          .replace(/^---[\s\S]*?---/, '') // Remove frontmatter
+          .replace(/!\[.*?\]\(.*?\)/g, '') // Remove images
+          .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Convert links to text
+          .replace(/[#*`_~]/g, '') // Remove markdown syntax
+          .replace(/\n+/g, ' ') // Replace newlines with spaces
+          .trim()
+        return text.substring(0, 250) + (text.length > 250 ? '...' : '')
       },
     },
   },

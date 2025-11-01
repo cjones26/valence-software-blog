@@ -46,11 +46,19 @@ export default async function PostPage({ params }: PostPageProps) {
   const formattedDate = format(new Date(post.date), 'MMMM d, yyyy');
 
   return (
-    <Layout layoutSource="post" postTitle={post.title} postDate={formattedDate}>
-      <article className="prose dark:prose-invert max-w-none">
+    <Layout>
+      <article className="prose dark:prose-invert">
+        <div className="mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-center mb-3 leading-tight text-gray-900 dark:text-white m-0">
+            {post.title}
+          </h1>
+          <p className="text-center text-sm text-gray-600 dark:text-gray-400 m-0">{formattedDate}</p>
+        </div>
         <MDXContent code={post.body.code} />
       </article>
-      <Comments />
+      <section className="mt-12 pt-8 border-t border-blue-200 dark:border-slate-700" aria-label="Comments">
+        <Comments />
+      </section>
     </Layout>
   );
 }

@@ -61,7 +61,7 @@ export default async function TagPage({ params }: TagPageProps) {
   const tagName = tag.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
 
   return (
-    <Layout layoutSource="index">
+    <Layout>
       <div className="mb-8">
         <h2 className="text-2xl font-bold">Posts tagged with &quot;{tagName}&quot;</h2>
         <p className="text-muted-foreground">{posts.length} post{posts.length !== 1 ? 's' : ''} found</p>

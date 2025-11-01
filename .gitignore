@@ -20,6 +20,9 @@
 # contentlayer
 .contentlayer
 
+# generated post images (copied from content/posts)
+/public/posts/
+
 # production
 /build
 

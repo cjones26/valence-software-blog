@@ -26,7 +26,7 @@ export default function TagsPage() {
     .map(([tag, count]) => ({ tag, count, slug: tag.toLowerCase().replace(/\s+/g, '-') }));
 
   return (
-    <Layout layoutSource="index">
+    <Layout>
       <div className="mb-8">
         <h2 className="text-2xl font-bold">All Tags</h2>
         <p className="text-muted-foreground">{sortedTags.length} tags found</p>

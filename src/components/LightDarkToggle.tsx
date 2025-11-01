@@ -1,41 +1,23 @@
 'use client';
 
-import React from 'react';
-import { useTheme } from 'next-themes';
+import { useTheme } from '@/components/ThemeProvider';
+import { FiSun, FiMoon } from 'react-icons/fi';
 
-export interface LightDarkToggleProps {
-  isPostOrAbout?: boolean;
-}
-
-export default function LightDarkToggle({ isPostOrAbout = false }: LightDarkToggleProps) {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTheme(event.target.checked ? 'light' : 'dark');
-  };
-
-  // Don't render anything until mounted to avoid hydration mismatch
-  if (!mounted) {
-    return null;
-  }
+export default function LightDarkToggle() {
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className={`items-end theme-toggler ${isPostOrAbout ? '' : 'pr-5 lg:pr-0'}`}>
-      <label htmlFor="toggle" className="title invisible h-0 absolute">
-        Toggle dark mode
-      </label>
-      <input
-        id="toggle"
-        className="toggle ml-5"
-        type="checkbox"
-        checked={theme !== 'dark'}
-        onChange={handleToggle}
-      />
-    </div>
+    <button
+      onClick={toggleTheme}
+      className="theme-toggle-button"
+      aria-label="Toggle dark mode"
+      type="button"
+    >
+      {theme === 'dark' ? (
+        <FiSun className="theme-toggle-icon" />
+      ) : (
+        <FiMoon className="theme-toggle-icon" />
+      )}
+    </button>
   );
 }
