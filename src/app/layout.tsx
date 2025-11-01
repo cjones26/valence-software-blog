@@ -23,7 +23,8 @@ export const metadata: Metadata = {
     default: 'Valence Software',
     template: '%s | Valence Software',
   },
-  description: 'Technical blog covering software development, system administration, and troubleshooting.',
+  description:
+    'Code, Systems, and Solutions: Practical Musings for the Working Engineer',
   metadataBase: new URL('https://valencesoftware.io'),
   openGraph: {
     type: 'website',
@@ -31,12 +32,14 @@ export const metadata: Metadata = {
     url: 'https://valencesoftware.io',
     siteName: 'Valence Software',
     title: 'Valence Software',
-    description: 'Technical blog covering software development, system administration, and troubleshooting.',
+    description:
+      'Code, Systems, and Solutions: Practical Musings for the Working Engineer',
   },
   twitter: {
     card: 'summary',
     title: 'Valence Software',
-    description: 'Technical blog covering software development, system administration, and troubleshooting.',
+    description:
+      'Code, Systems, and Solutions: Practical Musings for the Working Engineer',
   },
 };
 
@@ -47,10 +50,16 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
   const themeCookie = cookieStore.get(THEME_COOKIE_NAME);
-  const theme = (themeCookie?.value === 'dark' ? 'dark' : 'light') as 'light' | 'dark';
+  const theme = (themeCookie?.value === 'dark' ? 'dark' : 'light') as
+    | 'light'
+    | 'dark';
 
   return (
-    <html lang="en" className={theme === 'dark' ? 'dark' : ''} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={theme === 'dark' ? 'dark' : ''}
+      suppressHydrationWarning
+    >
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -58,7 +67,9 @@ export default async function RootLayout({
           }}
         />
       </head>
-      <body className={`${lato.variable} ${jetbrainsMono.variable} antialiased`}>
+      <body
+        className={`${lato.variable} ${jetbrainsMono.variable} antialiased`}
+      >
         <ThemeProvider initialTheme={theme}>{children}</ThemeProvider>
       </body>
     </html>
