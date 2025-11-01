@@ -34,7 +34,9 @@ export async function generateMetadata({ params }: TagPageProps) {
     };
   }
 
-  const tagName = tag.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
+  const tagName = tag
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (l) => l.toUpperCase());
 
   return {
     title: `Posts tagged with "${tagName}"`,
@@ -59,13 +61,19 @@ export default async function TagPage({ params }: TagPageProps) {
     notFound();
   }
 
-  const tagName = tag.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
+  const tagName = tag
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (l) => l.toUpperCase());
 
   return (
     <Layout>
       <div className="mb-8">
-        <h2 className="text-2xl font-bold">Posts tagged with &quot;{tagName}&quot;</h2>
-        <p className="text-muted-foreground">{posts.length} post{posts.length !== 1 ? 's' : ''} found</p>
+        <h2 className="text-2xl font-bold">
+          Posts tagged with &quot;{tagName}&quot;
+        </h2>
+        <p className="text-muted-foreground">
+          {posts.length} post{posts.length !== 1 ? 's' : ''} found
+        </p>
       </div>
       <div>
         {posts.map((post, index) => (
@@ -75,14 +83,19 @@ export default async function TagPage({ params }: TagPageProps) {
                 url: post.url,
                 title: post.title,
                 date: post.date,
-                tags: (post.tags || []).filter((tag): tag is string => Boolean(tag && typeof tag === 'string')),
+                tags: (post.tags || []).filter((tag): tag is string =>
+                  Boolean(tag && typeof tag === 'string')
+                ),
                 description: post.description,
                 excerpt: post.excerpt,
                 cover: post.coverImage,
                 blurDataURL: post.blurDataURL,
               }}
+              index={index}
             />
-            {index < posts.length - 1 && <hr className="border-0 border-t border-blue-200 dark:border-slate-700 my-8" />}
+            {index < posts.length - 1 && (
+              <hr className="border-0 border-t border-blue-200 dark:border-slate-700 my-8" />
+            )}
           </React.Fragment>
         ))}
       </div>
