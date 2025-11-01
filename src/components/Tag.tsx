@@ -11,7 +11,7 @@ export default function Tag({ tag, count }: TagProps) {
   return (
     <Link
       href={`/tags/${slug}`}
-      className="inline-block no-underline px-3 py-1.5 text-xs font-medium text-white bg-gray-600 dark:bg-gray-700 hover:bg-blue-600 dark:hover:bg-blue-500 rounded-md transition-colors duration-200 shadow-sm"
+      className="inline-block no-underline px-3 py-1.5 text-xs font-medium text-white bg-gray-600 dark:bg-gray-600 hover:bg-blue-600 dark:hover:bg-blue-500 rounded-md transition-colors duration-200 shadow-sm"
     >
       {tag}
       {count !== undefined && (
