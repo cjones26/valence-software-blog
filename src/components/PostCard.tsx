@@ -12,6 +12,7 @@ export interface PostCardProps {
     description?: string;
     excerpt?: string;
     cover?: string;
+    blurDataURL?: string;
   };
 }
 
@@ -32,6 +33,8 @@ export default function PostCard({ post }: PostCardProps) {
             className="object-cover hover:scale-105 transition-transform duration-300"
             unoptimized
             priority={false}
+            placeholder={post.blurDataURL ? 'blur' : 'empty'}
+            blurDataURL={post.blurDataURL}
           />
         </Link>
       )}

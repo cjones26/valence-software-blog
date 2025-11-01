@@ -5,6 +5,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import remarkGfm from 'remark-gfm'
 import fs from 'fs'
 import path from 'path'
+import { getPlaiceholder } from 'plaiceholder'
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -130,6 +131,38 @@ export const Post = defineDocumentType(() => ({
           .replace(/\n+/g, ' ') // Replace newlines with spaces
           .trim()
         return text.substring(0, 250) + (text.length > 250 ? '...' : '')
+      },
+    },
+    blurDataURL: {
+      type: 'string',
+      resolve: async (post) => {
+        if (!post.cover) return undefined
+
+        try {
+          // Determine the source path of the cover image
+          let imagePath: string
+
+          if (post.cover.startsWith('/')) {
+            // Public path - read from public folder
+            imagePath = path.join('public', post.cover)
+          } else {
+            // Relative path - read from content folder
+            const postDir = path.dirname(post._raw.sourceFilePath)
+            imagePath = path.join('content/posts', postDir, post.cover)
+          }
+
+          if (!fs.existsSync(imagePath)) {
+            console.warn(`Cover image not found: ${imagePath}`)
+            return undefined
+          }
+
+          const buffer = fs.readFileSync(imagePath)
+          const { base64 } = await getPlaiceholder(buffer, { size: 10 })
+          return base64
+        } catch (error) {
+          console.error(`Failed to generate blur placeholder for ${post.title}:`, error)
+          return undefined
+        }
       },
     },
   },

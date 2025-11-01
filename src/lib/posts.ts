@@ -10,6 +10,7 @@ export interface PostData {
   body: string;
   excerpt?: string;
   cover?: string;
+  blurDataURL?: string;
 }
 
 export function getPublishedPosts(): PostData[] {
@@ -27,5 +28,6 @@ export function getPublishedPosts(): PostData[] {
       body: post.body.raw,
       excerpt: post.excerpt,
       cover: post.coverImage,
+      blurDataURL: post.blurDataURL,
     }));
 }

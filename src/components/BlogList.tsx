@@ -13,6 +13,7 @@ interface Post {
   description?: string;
   excerpt?: string;
   cover?: string;
+  blurDataURL?: string;
 }
 
 interface BlogListProps {

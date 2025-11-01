@@ -79,6 +79,7 @@ export default async function TagPage({ params }: TagPageProps) {
                 description: post.description,
                 excerpt: post.excerpt,
                 cover: post.coverImage,
+                blurDataURL: post.blurDataURL,
               }}
             />
             {index < posts.length - 1 && <hr className="border-0 border-t border-blue-200 dark:border-slate-700 my-8" />}
