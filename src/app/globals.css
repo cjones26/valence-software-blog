@@ -112,8 +112,8 @@ html.dark {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: 9999px;
   background-color: #e5e7eb;
   border: none;
@@ -140,7 +140,7 @@ html.dark {
 }
 
 .theme-toggle-icon {
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   color: #374151;
   transition: transform 0.3s ease;
 }
@@ -151,6 +151,48 @@ html.dark {
 
 .theme-toggle-button:hover .theme-toggle-icon {
   transform: rotate(12deg) scale(1.1);
+}
+
+/* Search Toggle Button */
+.search-toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background-color: #e5e7eb;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dark .search-toggle-button {
+  background-color: #374151;
+}
+
+.search-toggle-button:hover {
+  background-color: #d1d5db;
+  transform: scale(1.05);
+}
+
+.dark .search-toggle-button:hover {
+  background-color: #4b5563;
+}
+
+.search-toggle-button:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.search-toggle-icon {
+  font-size: 1.125rem;
+  color: #374151;
+  transition: transform 0.3s ease;
+}
+
+.dark .search-toggle-icon {
+  color: #60a5fa;
 }
 
 /* Accessibility improvements */

@@ -1,6 +1,6 @@
 import { allPosts } from 'contentlayer/generated';
-import Link from 'next/link';
 import Layout from '@/components/Layout';
+import Tag from '@/components/Tag';
 
 export const metadata = {
   title: 'All Tags',
@@ -32,17 +32,8 @@ export default function TagsPage() {
         <p className="text-muted-foreground">{sortedTags.length} tags found</p>
       </div>
       <div className="flex flex-wrap gap-3">
-        {sortedTags.map(({ tag, count, slug }) => (
-          <Link
-            key={tag}
-            href={`/tags/${slug}`}
-            className="inline-flex items-center gap-2 rounded-md border border-border bg-muted px-4 py-2 text-sm hover:bg-muted/80 transition-colors"
-          >
-            <span>{tag}</span>
-            <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
-              {count}
-            </span>
-          </Link>
+        {sortedTags.map(({ tag, count }) => (
+          <Tag key={tag} tag={tag} count={count} />
         ))}
       </div>
     </Layout>

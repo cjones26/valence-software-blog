@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
+import Tag from './Tag';
 
 export interface PostCardProps {
   post: {
@@ -23,13 +24,12 @@ export default function PostCard({ post }: PostCardProps) {
   return (
     <article className="mb-0">
       {post.cover && (
-        <Link href={post.url} className="block mb-3">
+        <Link href={post.url} className="block mb-3 relative aspect-[2/1] overflow-hidden rounded-lg">
           <Image
             src={post.cover}
             alt={post.title}
-            width={1200}
-            height={630}
-            className="w-full h-auto rounded-lg hover:opacity-90 transition-opacity"
+            fill
+            className="object-cover hover:scale-105 transition-transform duration-300"
             unoptimized
             priority={false}
           />
@@ -37,7 +37,7 @@ export default function PostCard({ post }: PostCardProps) {
       )}
 
       <time
-        className="block text-xs font-medium tracking-wider uppercase text-gray-500 dark:text-gray-400 mb-2"
+        className="block text-xs font-medium tracking-wider uppercase text-gray-500 dark:text-gray-300 mb-2"
         dateTime={post.date}
       >
         {formattedDate}
@@ -46,14 +46,14 @@ export default function PostCard({ post }: PostCardProps) {
       <h2 className="text-xl md:text-2xl font-semibold tracking-tight mb-2 leading-tight">
         <Link
           href={post.url}
-          className="text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-cyan-400 transition-colors no-underline"
+          className="text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors no-underline"
         >
           {post.title}
         </Link>
       </h2>
 
       {post.excerpt && (
-        <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">
+        <p className="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-3 leading-relaxed">
           {post.excerpt}
         </p>
       )}
@@ -61,13 +61,7 @@ export default function PostCard({ post }: PostCardProps) {
       {validTags.length > 0 && (
         <div className="flex flex-wrap gap-2">
           {validTags.map((tag) => (
-            <Link
-              key={tag}
-              href={`/tags/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-              className="inline-block px-3 py-1.5 text-xs font-medium text-white bg-gray-600 dark:bg-gray-700 rounded-md hover:bg-blue-600 dark:hover:bg-cyan-600 transition-all shadow-sm"
-            >
-              {tag}
-            </Link>
+            <Tag key={tag} tag={tag} />
           ))}
         </div>
       )}

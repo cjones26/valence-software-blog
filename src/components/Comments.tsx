@@ -2,27 +2,18 @@
 
 import React from 'react';
 import Giscus from '@giscus/react';
-import { useTheme } from 'next-themes';
+import { useTheme } from '@/components/ThemeProvider';
 
 export default function Comments() {
   const { theme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
-    <div className="utterances-comment-box mt-8">
+    <div className="mt-8">
       <Giscus
-        repo="cjones26/valence-software-blog-comments"
-        repoId="YOUR_REPO_ID"
-        category="General"
-        categoryId="YOUR_CATEGORY_ID"
+        repo="cjones26/valence-software-blog"
+        repoId="R_kgDOQNRjFg"
+        category="Announcements"
+        categoryId="DIC_kwDOQNRjFs4CxVH0"
         mapping="pathname"
         reactionsEnabled="1"
         emitMetadata="0"

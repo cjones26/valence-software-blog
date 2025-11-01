@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
-import { Lato, JetBrains_Mono } from 'next/font/google';
+import { Lato, JetBrains_Mono, Manrope } from 'next/font/google';
 import ThemeProvider from '@/components/ThemeProvider';
 import { THEME_COOKIE_NAME } from '@/lib/theme';
 import './globals.css';
@@ -15,6 +15,13 @@ const lato = Lato({
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
+  display: 'swap',
+});
+
+const manrope = Manrope({
+  weight: ['600', '700'],
+  subsets: ['latin'],
+  variable: '--font-display',
   display: 'swap',
 });
 
@@ -68,7 +75,7 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`${lato.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${lato.variable} ${jetbrainsMono.variable} ${manrope.variable} antialiased`}
       >
         <ThemeProvider initialTheme={theme}>{children}</ThemeProvider>
       </body>

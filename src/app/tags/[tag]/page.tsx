@@ -1,3 +1,4 @@
+import React from 'react';
 import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
@@ -66,18 +67,24 @@ export default async function TagPage({ params }: TagPageProps) {
         <h2 className="text-2xl font-bold">Posts tagged with &quot;{tagName}&quot;</h2>
         <p className="text-muted-foreground">{posts.length} post{posts.length !== 1 ? 's' : ''} found</p>
       </div>
-      {posts.map((post) => (
-        <PostCard
-          key={post.url}
-          post={{
-            url: post.url,
-            title: post.title,
-            date: post.date,
-            tags: (post.tags || []).filter((tag): tag is string => Boolean(tag && typeof tag === 'string')),
-            description: post.description,
-          }}
-        />
-      ))}
+      <div>
+        {posts.map((post, index) => (
+          <React.Fragment key={post.url}>
+            <PostCard
+              post={{
+                url: post.url,
+                title: post.title,
+                date: post.date,
+                tags: (post.tags || []).filter((tag): tag is string => Boolean(tag && typeof tag === 'string')),
+                description: post.description,
+                excerpt: post.excerpt,
+                cover: post.coverImage,
+              }}
+            />
+            {index < posts.length - 1 && <hr className="border-0 border-t border-blue-200 dark:border-slate-700 my-8" />}
+          </React.Fragment>
+        ))}
+      </div>
     </Layout>
   );
 }
