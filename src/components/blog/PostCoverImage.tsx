@@ -9,7 +9,11 @@ interface PostCoverImageProps {
   blurDataURL?: string;
 }
 
-export default function PostCoverImage({ src, alt, blurDataURL }: PostCoverImageProps) {
+export default function PostCoverImage({
+  src,
+  alt,
+  blurDataURL,
+}: PostCoverImageProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
@@ -22,9 +26,10 @@ export default function PostCoverImage({ src, alt, blurDataURL }: PostCoverImage
         className="object-cover"
         style={{
           opacity: imageLoaded ? 1 : 0,
-          transition: 'opacity 0.3s ease-in-out'
+          transition: 'opacity 0.3s ease-in-out',
         }}
         preload
+        fetchPriority="high"
         placeholder="blur"
         blurDataURL={blurDataURL}
         onLoad={() => setImageLoaded(true)}

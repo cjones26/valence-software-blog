@@ -1,12 +1,16 @@
 import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 import { format } from 'date-fns';
+import dynamic from 'next/dynamic';
 import PageLayout from '@/components/layout/PageLayout';
-import Comments from '@/components/ui/Comments';
 import MDXContent from '@/components/mdx/MDXContent';
 import Tag from '@/components/blog/Tag';
 import PostCoverImage from '@/components/blog/PostCoverImage';
 import { BlogPostingSchema, BreadcrumbSchema } from '@/components/analytics/StructuredData';
+
+const Comments = dynamic(() => import('@/components/ui/Comments'), {
+  loading: () => <div className="mt-8 text-center text-gray-500">Loading comments...</div>,
+});
 
 interface PostPageProps {
   params: Promise<{

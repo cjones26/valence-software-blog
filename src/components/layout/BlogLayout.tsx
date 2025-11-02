@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
-import Fuse from 'fuse.js';
+import { useState, useMemo, useEffect } from 'react';
+import type Fuse from 'fuse.js';
 import Header from './Header';
 import Footer from './Footer';
 import BlogList from '../blog/BlogList';
@@ -31,6 +31,16 @@ export default function BlogLayout({
   const [searchInput, setSearchInput] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const [searchPage, setSearchPage] = useState(1);
+  const [FuseLib, setFuseLib] = useState<typeof Fuse | null>(null);
+
+  // Lazy load Fuse.js only when user starts searching
+  useEffect(() => {
+    if (searchInput && !FuseLib) {
+      import('fuse.js').then((module) => {
+        setFuseLib(() => module.default);
+      });
+    }
+  }, [searchInput, FuseLib]);
 
   // Debounce search query
   useEffect(() => {
@@ -42,20 +52,21 @@ export default function BlogLayout({
   }, [searchInput]);
 
   const fuse = useMemo(() => {
-    return new Fuse(allPosts, {
+    if (!FuseLib) return null;
+    return new FuseLib(allPosts, {
       keys: ['title', 'description', 'tags', 'body'],
       threshold: 0.3,
       includeScore: true,
     });
-  }, [allPosts]);
+  }, [allPosts, FuseLib]);
 
   const isSearching = debouncedQuery.trim().length > 0;
 
   // When searching: search ALL posts and paginate results
   // When not searching: use the static page's posts
   const filteredPosts = useMemo(() => {
-    if (!isSearching) {
-      return null; // Not searching, use static pagination
+    if (!isSearching || !fuse) {
+      return null; // Not searching or Fuse not loaded yet, use static pagination
     }
     return fuse.search(debouncedQuery).map((result) => result.item);
   }, [debouncedQuery, fuse, isSearching]);

@@ -89,12 +89,22 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={theme === 'dark' ? 'dark' : ''}
-      data-scroll-behavior="smooth"
+      className={`scroll-smooth ${theme === 'dark' ? 'dark' : ''}`}
       suppressHydrationWarning
     >
       <head>
         <GoogleAnalytics />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              :root{--background:#fff;--background-image:radial-gradient(circle at .5% 50.5%,rgba(200,220,255,.8) 0%,#fff 100.2%);--foreground:#171717}
+              .dark{--background:#0a0a0a;--background-image:radial-gradient(circle at .5% 50.5%,rgb(15,23,42) 0%,rgb(3,7,18) 100.2%);--foreground:#ededed;color-scheme:dark}
+              html{font-size:1.2rem;overflow-x:hidden;background-color:var(--background);min-height:100dvh}
+              body{font-family:var(--font-sans),-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;min-height:100dvh;position:relative;color:var(--foreground);overflow-x:hidden}
+              body::before{content:'';position:fixed;inset:0;background:var(--background-image);z-index:-1;pointer-events:none}
+            `,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `!function(){try{var d=document.documentElement;var c=document.cookie.match(/theme=([^;]+)/);var t=c?c[1]:'light';if(t==='dark'){d.classList.add('dark');d.style.colorScheme='dark'}else{d.classList.remove('dark');d.style.colorScheme='light'}}catch(e){}}();`,

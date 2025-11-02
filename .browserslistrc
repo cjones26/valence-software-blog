@@ -1,6 +1,20 @@
-# Modern browsers that support ES6+ features
-# This reduces unnecessary polyfills and improves bundle size
+# Target only modern browsers that support ES2020+ features
+# This eliminates unnecessary polyfills and reduces bundle size
 
-defaults
+# Last 2 versions of major browsers
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Safari versions
+last 2 Edge versions
+
+# Modern mobile browsers
+last 2 iOS versions
+last 2 Android versions
+
+# Explicitly exclude older browsers
 not IE 11
+not dead
+not op_mini all
+
+# Support for Node.js (for SSR)
 maintained node versions

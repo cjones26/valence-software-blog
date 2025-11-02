@@ -15,13 +15,13 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+  // Target modern browsers to avoid unnecessary polyfills
+  transpilePackages: [],
   experimental: {
     // Optimize package imports for better tree-shaking
-    optimizePackageImports: [
-      'react-icons',
-      '@giscus/react',
-      'date-fns',
-    ],
+    optimizePackageImports: ['react-icons', '@giscus/react', 'date-fns', 'fuse.js'],
+    // Optimize CSS
+    optimizeCss: true,
   },
 };
 
