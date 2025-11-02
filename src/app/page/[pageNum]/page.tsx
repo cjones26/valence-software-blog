@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
-import BlogLayout from '@/components/BlogLayout';
+import BlogLayout from '@/components/layout/BlogLayout';
 import { getPublishedPosts } from '@/lib/posts';
 
 interface PageProps {

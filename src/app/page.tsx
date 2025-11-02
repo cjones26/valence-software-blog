@@ -1,7 +1,13 @@
-import BlogLayout from '@/components/BlogLayout';
+import BlogLayout from '@/components/layout/BlogLayout';
 import { getPublishedPosts } from '@/lib/posts';
+import { WebsiteSchema } from '@/components/analytics/StructuredData';
 
 export default function HomePage() {
   const posts = getPublishedPosts();
-  return <BlogLayout allPosts={posts} currentPage={1} />;
+  return (
+    <>
+      <WebsiteSchema />
+      <BlogLayout allPosts={posts} currentPage={1} />
+    </>
+  );
 }

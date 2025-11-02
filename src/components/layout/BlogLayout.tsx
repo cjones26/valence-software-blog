@@ -4,7 +4,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import Fuse from 'fuse.js';
 import Header from './Header';
 import Footer from './Footer';
-import BlogList from './BlogList';
+import BlogList from '../blog/BlogList';
 
 interface Post {
   url: string;

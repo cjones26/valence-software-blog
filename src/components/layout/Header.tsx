@@ -3,10 +3,10 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import LightDarkToggle from './LightDarkToggle';
-import SearchToggle from './SearchToggle';
-import MobileSearchInput from './MobileSearchInput';
-import SearchInput from './SearchInput';
+import LightDarkToggle from '../ui/LightDarkToggle';
+import SearchToggle from '../search/SearchToggle';
+import MobileSearchInput from '../search/MobileSearchInput';
+import SearchInput from '../search/SearchInput';
 
 interface HeaderProps {
   searchQuery?: string;

@@ -1,11 +1,12 @@
 import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 import { format } from 'date-fns';
-import Layout from '@/components/Layout';
-import Comments from '@/components/Comments';
-import MDXContent from '@/components/MDXContent';
-import Tag from '@/components/Tag';
-import PostCoverImage from '@/components/PostCoverImage';
+import PageLayout from '@/components/layout/PageLayout';
+import Comments from '@/components/ui/Comments';
+import MDXContent from '@/components/mdx/MDXContent';
+import Tag from '@/components/blog/Tag';
+import PostCoverImage from '@/components/blog/PostCoverImage';
+import { BlogPostingSchema, BreadcrumbSchema } from '@/components/analytics/StructuredData';
 
 interface PostPageProps {
   params: Promise<{
@@ -32,7 +33,15 @@ export default async function PostPage({ params }: PostPageProps) {
   );
 
   return (
-    <Layout>
+    <PageLayout>
+      <BlogPostingSchema post={post} />
+      <BreadcrumbSchema
+        items={[
+          { name: 'Home', url: '/' },
+          { name: post.title, url: post.url },
+        ]}
+      />
+
       {post.coverImage && (
         <PostCoverImage
           src={post.coverImage}
@@ -66,7 +75,7 @@ export default async function PostPage({ params }: PostPageProps) {
       >
         <Comments />
       </section>
-    </Layout>
+    </PageLayout>
   );
 }
 
@@ -87,8 +96,46 @@ export async function generateMetadata({ params }: PostPageProps) {
     return {};
   }
 
+  const url = `https://valencesoftware.io${post.url}`;
+
+  // Generate a better description fallback if none exists
+  const description = post.description ||
+    post.excerpt ||
+    `Read about ${post.title} - a software engineering blog post covering practical programming insights and solutions.`;
+
+  // Use cover image for OG/Twitter if available
+  const images = post.coverImage
+    ? [
+        {
+          url: `https://valencesoftware.io${post.coverImage}`,
+          alt: post.title,
+        },
+      ]
+    : [];
+
   return {
     title: post.title,
-    description: post.description || `Blog post: ${post.title}`,
+    description,
+    keywords: post.tags || [],
+    authors: [{ name: 'Charles Jones' }],
+    alternates: {
+      canonical: post.url,
+    },
+    openGraph: {
+      type: 'article',
+      url,
+      title: post.title,
+      description,
+      images,
+      publishedTime: post.date,
+      authors: ['Charles Jones'],
+      tags: post.tags || [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description,
+      images,
+    },
   };
 }

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Layout from '@/components/Layout';
+import PageLayout from '@/components/layout/PageLayout';
 
 export const metadata = {
   title: 'About',
@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <Layout>
+    <PageLayout>
       <article className="prose dark:prose-invert">
         <div className="flex justify-center mb-6">
           <Image
@@ -17,6 +17,7 @@ export default function AboutPage() {
             width={400}
             height={400}
             className="rounded-3xl"
+            style={{ width: 'auto', height: 'auto' }}
             preload
             quality={100}
           />
@@ -57,6 +58,6 @@ export default function AboutPage() {
           my employer.
         </p>
       </article>
-    </Layout>
+    </PageLayout>
   );
 }

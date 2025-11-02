@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Giscus from '@giscus/react';
-import { useTheme } from '@/components/ThemeProvider';
+import { useTheme } from '@/components/ui/ThemeProvider';
 
 export default function Comments() {
   const { theme } = useTheme();

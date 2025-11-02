@@ -1,6 +1,6 @@
 import { allPosts } from 'contentlayer/generated';
-import Layout from '@/components/Layout';
-import Tag from '@/components/Tag';
+import PageLayout from '@/components/layout/PageLayout';
+import Tag from '@/components/blog/Tag';
 
 export const metadata = {
   title: 'All Tags',
@@ -26,7 +26,7 @@ export default function TagsPage() {
     .map(([tag, count]) => ({ tag, count, slug: tag.toLowerCase().replace(/\s+/g, '-') }));
 
   return (
-    <Layout>
+    <PageLayout>
       <div className="mb-8">
         <h2 className="text-2xl font-bold">All Tags</h2>
         <p className="text-muted-foreground">{sortedTags.length} tags found</p>
@@ -36,6 +36,6 @@ export default function TagsPage() {
           <Tag key={tag} tag={tag} count={count} />
         ))}
       </div>
-    </Layout>
+    </PageLayout>
   );
 }

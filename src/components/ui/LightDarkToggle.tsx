@@ -1,6 +1,6 @@
 'use client';
 
-import { useTheme } from '@/components/ThemeProvider';
+import { useTheme } from '@/components/ui/ThemeProvider';
 import { FiSun, FiMoon } from 'react-icons/fi';
 
 export default function LightDarkToggle() {

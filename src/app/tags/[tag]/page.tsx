@@ -2,8 +2,8 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
-import Layout from '@/components/Layout';
-import PostCard from '@/components/PostCard';
+import PageLayout from '@/components/layout/PageLayout';
+import PostCard from '@/components/blog/PostCard';
 
 interface TagPageProps {
   params: Promise<{
@@ -66,7 +66,7 @@ export default async function TagPage({ params }: TagPageProps) {
     .replace(/\b\w/g, (l) => l.toUpperCase());
 
   return (
-    <Layout>
+    <PageLayout>
       <div className="mb-8">
         <h2 className="text-2xl font-bold">
           Posts tagged with &quot;{tagName}&quot;
@@ -99,6 +99,6 @@ export default async function TagPage({ params }: TagPageProps) {
           </React.Fragment>
         ))}
       </div>
-    </Layout>
+    </PageLayout>
   );
 }
