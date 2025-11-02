@@ -58,11 +58,20 @@ export const metadata: Metadata = {
     siteName: 'Valence Software',
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: '/valence-logo-1024-1024.png',
+        width: 1024,
+        height: 1024,
+        alt: 'Valence Software Logo',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    images: ['/valence-logo-1024-1024.png'],
   },
 };
 
