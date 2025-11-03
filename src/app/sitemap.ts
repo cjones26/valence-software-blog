@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { allPosts } from 'contentlayer/generated'
+import { parseDateSafe } from '@/lib/dateUtils'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://valencesoftware.io'
@@ -29,10 +30,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  // Blog post pages
+  // Blog post pages - use actual post dates for accurate SEO signals
   const postPages: MetadataRoute.Sitemap = publishedPosts.map((post) => ({
     url: `${baseUrl}${post.url}`,
-    lastModified: new Date(post.date),
+    lastModified: parseDateSafe(post.date),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }))

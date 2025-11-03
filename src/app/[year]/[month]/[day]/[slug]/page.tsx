@@ -1,12 +1,12 @@
 import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
-import { format } from 'date-fns';
 import dynamic from 'next/dynamic';
 import PageLayout from '@/components/layout/PageLayout';
 import MDXContent from '@/components/mdx/MDXContent';
 import Tag from '@/components/blog/Tag';
 import PostCoverImage from '@/components/blog/PostCoverImage';
 import { BlogPostingSchema, BreadcrumbSchema } from '@/components/analytics/StructuredData';
+import { formatDateSafe } from '@/lib/dateUtils';
 
 const Comments = dynamic(() => import('@/components/ui/Comments'), {
   loading: () => <div className="mt-8 text-center text-gray-500">Loading comments...</div>,
@@ -31,7 +31,7 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound();
   }
 
-  const formattedDate = format(new Date(post.date), 'MMMM d, yyyy');
+  const formattedDate = formatDateSafe(post.date);
   const validTags = (post.tags || []).filter((tag): tag is string =>
     Boolean(tag && typeof tag === 'string')
   );

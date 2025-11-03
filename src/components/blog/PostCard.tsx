@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { format } from 'date-fns';
 import { useState } from 'react';
+import { formatDateSafe } from '@/lib/dateUtils';
 import Tag from './Tag';
 
 export interface PostCardProps {
@@ -22,7 +22,7 @@ export interface PostCardProps {
 
 export default function PostCard({ post, index }: PostCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const formattedDate = format(new Date(post.date), 'MMMM d, yyyy');
+  const formattedDate = formatDateSafe(post.date);
   const validTags = post.tags.filter((tag): tag is string =>
     Boolean(tag && typeof tag === 'string')
   );
