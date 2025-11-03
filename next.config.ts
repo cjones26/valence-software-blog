@@ -22,6 +22,8 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['react-icons', '@giscus/react', 'date-fns', 'fuse.js'],
     // Optimize CSS
     optimizeCss: true,
+    // Inline critical CSS to reduce render blocking
+    inlineCss: true,
   },
 };
 

@@ -14,20 +14,23 @@ const lato = Lato({
   weight: ['400', '700'],
   subsets: ['latin'],
   variable: '--font-sans',
-  display: 'swap',
+  display: 'optional',
+  preload: true,
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
-  display: 'swap',
+  display: 'optional',
+  preload: false,
 });
 
 const manrope = Manrope({
   weight: ['600', '700'],
   subsets: ['latin'],
   variable: '--font-display',
-  display: 'swap',
+  display: 'optional',
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -93,6 +96,9 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <GoogleAnalytics />
         <style
           dangerouslySetInnerHTML={{

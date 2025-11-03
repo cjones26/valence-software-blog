@@ -45,6 +45,8 @@ function Pagination({
   const isNextDisabled = currentPage === totalPages;
   const navButtonClass =
     'px-4 py-2 text-sm font-medium text-gray-900 dark:text-gray-100 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors';
+  const navButtonDisabledClass =
+    'px-4 py-2 text-sm font-medium text-gray-500 dark:text-gray-300 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-700 rounded-lg cursor-not-allowed';
 
   return (
     <div className="flex justify-center items-center gap-2 mt-12">
@@ -52,16 +54,17 @@ function Pagination({
         <button
           onClick={() => onSearchPageChange?.(prevPage)}
           disabled={isPrevDisabled}
-          className={`${navButtonClass} disabled:opacity-50 disabled:cursor-not-allowed`}
+          className={isPrevDisabled ? navButtonDisabledClass : navButtonClass}
         >
           Previous
         </button>
       ) : (
         <Link
           href={currentPage === 2 ? '/' : `/page/${prevPage}`}
-          className={`${navButtonClass} ${
-            isPrevDisabled ? 'opacity-50 pointer-events-none' : ''
+          className={`${
+            isPrevDisabled ? navButtonDisabledClass + ' pointer-events-none' : navButtonClass
           }`}
+          aria-disabled={isPrevDisabled}
         >
           Previous
         </Link>
@@ -75,16 +78,17 @@ function Pagination({
         <button
           onClick={() => onSearchPageChange?.(nextPage)}
           disabled={isNextDisabled}
-          className={`${navButtonClass} disabled:opacity-50 disabled:cursor-not-allowed`}
+          className={isNextDisabled ? navButtonDisabledClass : navButtonClass}
         >
           Next
         </button>
       ) : (
         <Link
           href={`/page/${nextPage}`}
-          className={`${navButtonClass} ${
-            isNextDisabled ? 'opacity-50 pointer-events-none' : ''
+          className={`${
+            isNextDisabled ? navButtonDisabledClass + ' pointer-events-none' : navButtonClass
           }`}
+          aria-disabled={isNextDisabled}
         >
           Next
         </Link>

@@ -35,17 +35,16 @@ export default function Header({ searchQuery = '', onSearchChange, onReset }: He
               {/* Logo layer */}
               <div className="relative w-full h-full flex items-center justify-center">
                 <div className="relative w-8 h-8 flex items-center justify-center translate-x-[1px] translate-y-[2px]">
-                  <picture>
-                    <source srcSet="/valence-logo-1200-1200.webp" type="image/webp" />
-                    <Image
-                      src="/valence-logo-1024-1024.png"
-                      alt="Valence Software"
-                      width={48}
-                      height={48}
-                      className="w-full h-full object-contain scale-[1.4]"
-                      quality={90}
-                    />
-                  </picture>
+                  <Image
+                    src="/valence-logo-800-800.png"
+                    alt="Valence Software"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-contain scale-[1.4]"
+                    quality={90}
+                    priority
+                    sizes="32px"
+                  />
                 </div>
               </div>
             </div>
