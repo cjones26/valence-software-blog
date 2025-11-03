@@ -45,7 +45,7 @@ export default function Footer() {
           rel="noopener noreferrer"
           className="hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
         >
-          ©{new Date().getFullYear()} Charles Jones - CC BY 4.0
+          ©<span suppressHydrationWarning>{new Date().getFullYear()}</span> Charles Jones - CC BY 4.0
         </a>
       </p>
     </footer>

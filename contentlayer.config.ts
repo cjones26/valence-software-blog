@@ -8,6 +8,23 @@ import path from 'path'
 import { getPlaiceholder } from 'plaiceholder'
 import sharp from 'sharp'
 
+/**
+ * Parse a date (string or Date object) without timezone issues.
+ * Returns an object with year, month (1-12), and day.
+ */
+function parseDateSafe(date: string | Date): { year: number; month: number; day: number } {
+  if (date instanceof Date) {
+    return {
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate()
+    }
+  }
+  // Handle string in YYYY-MM-DD format
+  const [year, month, day] = date.split('T')[0].split('-').map(Number)
+  return { year, month, day }
+}
+
 export const Post = defineDocumentType(() => ({
   name: 'Post',
   filePathPattern: `**/*.mdx`,
@@ -103,12 +120,12 @@ export const Post = defineDocumentType(() => ({
           const year = pathParts[0]
           const slug = pathParts[1]
 
-          // Get the date to extract month and day
-          const date = new Date(post.date)
-          const month = String(date.getMonth() + 1).padStart(2, '0')
-          const day = String(date.getDate()).padStart(2, '0')
+          // Parse the date safely without timezone issues
+          const { month, day } = parseDateSafe(post.date)
+          const monthStr = String(month).padStart(2, '0')
+          const dayStr = String(day).padStart(2, '0')
 
-          return `${year}/${month}/${day}/${slug}`
+          return `${year}/${monthStr}/${dayStr}/${slug}`
         }
         return post._raw.flattenedPath
       },
@@ -121,11 +138,12 @@ export const Post = defineDocumentType(() => ({
           const year = pathParts[0]
           const slug = pathParts[1]
 
-          const date = new Date(post.date)
-          const month = String(date.getMonth() + 1).padStart(2, '0')
-          const day = String(date.getDate()).padStart(2, '0')
+          // Parse the date safely without timezone issues
+          const { month, day } = parseDateSafe(post.date)
+          const monthStr = String(month).padStart(2, '0')
+          const dayStr = String(day).padStart(2, '0')
 
-          return `/${year}/${month}/${day}/${slug}`
+          return `/${year}/${monthStr}/${dayStr}/${slug}`
         }
         return `/${post._raw.flattenedPath}`
       },
