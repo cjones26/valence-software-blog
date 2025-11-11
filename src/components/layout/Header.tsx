@@ -48,7 +48,7 @@ export default function Header({ searchQuery = '', onSearchChange, onReset }: He
                 </div>
               </div>
             </div>
-            <h1 className="hidden sm:block text-lg md:text-xl lg:text-2xl font-bold tracking-tight m-0 leading-none text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors font-[family-name:var(--font-display)]">
+            <h1 className="hidden sm:block text-lg md:text-xl lg:text-2xl font-bold tracking-tight m-0 leading-none text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
               Valence Software
             </h1>
           </Link>

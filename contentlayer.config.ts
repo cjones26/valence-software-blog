@@ -3,10 +3,13 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import remarkGfm from 'remark-gfm'
+import remarkDirective from 'remark-directive'
 import fs from 'fs'
 import path from 'path'
 import { getPlaiceholder } from 'plaiceholder'
 import sharp from 'sharp'
+import remarkInlineImages from './lib/remark-inline-images'
+import remarkCallouts from './lib/remark-callouts'
 
 /**
  * Parse a date (string or Date object) without timezone issues.
@@ -202,7 +205,12 @@ export default makeSource({
   contentDirPath: 'content/posts',
   documentTypes: [Post],
   mdx: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [
+      remarkGfm,
+      remarkInlineImages,
+      remarkDirective,
+      remarkCallouts,
+    ],
     rehypePlugins: [
       rehypeSlug,
       [
@@ -212,7 +220,7 @@ export default makeSource({
             dark: 'github-dark',
             light: 'github-light',
           },
-          keepBackground: false,
+          keepBackground: true,
         },
       ],
       [

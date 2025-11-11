@@ -1,36 +1,21 @@
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
-import { Lato, JetBrains_Mono, Manrope } from 'next/font/google';
+import { JetBrains_Mono } from 'next/font/google';
 import ThemeProvider from '@/components/ui/ThemeProvider';
 import GoogleAnalytics, { GoogleTagManagerNoScript } from '@/components/analytics/GoogleAnalytics';
 import { THEME_COOKIE_NAME } from '@/lib/theme';
+import './fonts.css';
 import './globals.css';
 
 const SITE_TITLE = 'Valence Software | Software Engineering Blog';
 const SITE_DESCRIPTION =
   'A software engineering blog covering practical programming tutorials, systems architecture, JavaScript development, and real-world solutions for working engineers. Insights on code quality, performance optimization, and modern web development.';
 
-const lato = Lato({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  variable: '--font-sans',
-  display: 'optional',
-  preload: true,
-});
-
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
   display: 'optional',
   preload: false,
-});
-
-const manrope = Manrope({
-  weight: ['600', '700'],
-  subsets: ['latin'],
-  variable: '--font-display',
-  display: 'optional',
-  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -96,6 +81,8 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <link rel="preload" href="/fonts/FixelText-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/FixelText-SemiBold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
@@ -103,11 +90,11 @@ export default async function RootLayout({
         <style
           dangerouslySetInnerHTML={{
             __html: `
-              :root{--background:#fff;--background-image:radial-gradient(circle at .5% 50.5%,rgba(200,220,255,.8) 0%,#fff 100.2%);--foreground:#171717}
-              .dark{--background:#0a0a0a;--background-image:radial-gradient(circle at .5% 50.5%,rgb(15,23,42) 0%,rgb(3,7,18) 100.2%);--foreground:#ededed;color-scheme:dark}
-              html{font-size:1.2rem;overflow-x:hidden;background-color:var(--background);min-height:100dvh}
-              body{font-family:var(--font-sans),-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;min-height:100dvh;position:relative;color:var(--foreground);overflow-x:hidden}
-              body::before{content:'';position:fixed;inset:0;background:var(--background-image);z-index:-1;pointer-events:none}
+              :root{--background:#ffffff;--foreground:#0f172a;--subtle-gradient:linear-gradient(180deg,#ffffff 0%,#fafafa 100%)}
+              .dark{--background:#0a0a0a;--foreground:#f1f5f9;--subtle-gradient:linear-gradient(180deg,#0a0a0a 0%,#050505 100%);color-scheme:dark}
+              html{font-size:1.15rem;overflow-x:hidden;background:var(--subtle-gradient);min-height:100dvh}
+              body{font-family:'Fixel',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;min-height:100dvh;color:var(--foreground);overflow-x:hidden;letter-spacing:0.01em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+              @supports (font-variation-settings:normal){body{font-feature-settings:'kern' 1,'liga' 1,'calt' 1}}
             `,
           }}
         />
@@ -118,7 +105,7 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`${lato.variable} ${jetbrainsMono.variable} ${manrope.variable} antialiased`}
+        className={jetbrainsMono.variable}
       >
         <GoogleTagManagerNoScript />
         <ThemeProvider initialTheme={theme}>{children}</ThemeProvider>

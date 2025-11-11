@@ -1,17 +1,183 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
-/* Note: Critical CSS (theme variables, base styles) are inlined in layout.tsx */
-
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --font-family-sans: 'Fixel', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Configure dark mode for Tailwind v4 */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Prose styling for article content */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Fixel', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
 article.prose {
   @apply prose prose-slate dark:prose-invert max-w-none md:prose-lg;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  text-rendering: optimizeLegibility;
+}
+
+
+article.prose p {
+  @apply text-slate-800 dark:text-slate-200;
+  line-height: 1.8;
+  margin-bottom: 1.25em;
+}
+
+article.prose h1,
+article.prose h2,
+article.prose h3,
+article.prose h4,
+article.prose h5,
+article.prose h6 {
+  @apply text-slate-900 dark:text-slate-50;
+  font-family: 'Fixel', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+article.prose :not(pre) > code {
+  @apply bg-slate-100 dark:bg-slate-800;
+  @apply text-slate-900 dark:text-slate-100;
+  @apply px-1.5 py-0.5 rounded;
+  font-size: 0.9em;
+}
+
+article.prose pre {
+  @apply rounded-lg border border-slate-200 dark:border-slate-700;
+  overflow-x: auto;
+  background-color: var(--shiki-light-bg);
+  color: var(--shiki-light);
+}
+
+.dark article.prose pre {
+  background-color: var(--shiki-dark-bg);
+  color: var(--shiki-dark);
+}
+
+article.prose pre code {
+  background: transparent;
+  color: inherit;
+}
+
+article.prose pre code span {
+  color: var(--shiki-light);
+}
+
+.dark article.prose pre code span {
+  color: var(--shiki-dark);
+}
+
+article.prose a {
+  @apply text-blue-600 dark:text-blue-400;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+article.prose a:hover {
+  @apply text-blue-700 dark:text-blue-300;
+}
+
+article.prose img {
+  @apply mx-auto;
+}
+
+.callout {
+  @apply my-6 rounded-xl p-5 border shadow-sm;
+}
+
+.callout-title {
+  @apply mb-3 font-semibold text-base flex items-center gap-2;
+}
+
+.callout-content {
+  @apply text-[16.5px] leading-relaxed;
+}
+
+.callout-content > p:first-child {
+  @apply mt-0;
+}
+
+.callout-content > p:last-child {
+  @apply mb-0;
+}
+
+.callout-note {
+  @apply bg-blue-50/80 border-blue-200/60;
+  @apply dark:bg-blue-950/20 dark:border-blue-800/40;
+}
+
+.callout-note .callout-title {
+  @apply text-blue-900 dark:text-blue-200;
+}
+
+.callout-note .callout-content {
+  @apply text-slate-700 dark:text-slate-300;
+}
+
+.callout-info {
+  @apply bg-cyan-50/80 border-cyan-200/60;
+  @apply dark:bg-cyan-950/20 dark:border-cyan-800/40;
+}
+
+.callout-info .callout-title {
+  @apply text-cyan-900 dark:text-cyan-200;
+}
+
+.callout-info .callout-content {
+  @apply text-slate-700 dark:text-slate-300;
+}
+
+.callout-tip {
+  @apply bg-emerald-50/80 border-emerald-200/60;
+  @apply dark:bg-emerald-950/20 dark:border-emerald-800/40;
+}
+
+.callout-tip .callout-title {
+  @apply text-emerald-900 dark:text-emerald-200;
+}
+
+.callout-tip .callout-content {
+  @apply text-slate-700 dark:text-slate-300;
+}
+
+.callout-warning {
+  @apply bg-amber-50/80 border-amber-200/60;
+  @apply dark:bg-amber-950/20 dark:border-amber-800/40;
+}
+
+.callout-warning .callout-title {
+  @apply text-amber-900 dark:text-amber-200;
+}
+
+.callout-warning .callout-content {
+  @apply text-slate-700 dark:text-slate-300;
+}
+
+.callout-caution {
+  @apply bg-orange-50/80 border-orange-200/60;
+  @apply dark:bg-orange-950/20 dark:border-orange-800/40;
+}
+
+.callout-caution .callout-title {
+  @apply text-orange-900 dark:text-orange-200;
+}
+
+.callout-caution .callout-content {
+  @apply text-slate-700 dark:text-slate-300;
+}
+
+.callout-danger {
+  @apply bg-red-50/80 border-red-200/60;
+  @apply dark:bg-red-950/20 dark:border-red-800/40;
+}
+
+.callout-danger .callout-title {
+  @apply text-red-900 dark:text-red-200;
+}
+
+.callout-danger .callout-content {
+  @apply text-slate-700 dark:text-slate-300;
 }
