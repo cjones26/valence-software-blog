@@ -40,10 +40,6 @@ export default function PostCard({ post, index }: PostCardProps) {
             fill
             sizes="(max-width: 768px) calc(100vw - 2rem), 768px"
             className="object-cover hover:scale-105 transition-transform duration-300"
-            style={index === 0 ? undefined : {
-              opacity: imageLoaded ? 1 : 0,
-              transition: 'opacity 0.3s ease-in-out'
-            }}
             placeholder="blur"
             blurDataURL={post.blurDataURL}
             onLoad={() => setImageLoaded(true)}
