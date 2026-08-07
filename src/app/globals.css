@@ -84,6 +84,15 @@ article.prose img {
   @apply mx-auto;
 }
 
+.medium-zoom-overlay {
+  z-index: 999;
+}
+
+.medium-zoom-image--opened {
+  z-index: 1000;
+  cursor: zoom-out !important;
+}
+
 .callout {
   @apply my-6 rounded-xl p-5 border shadow-sm;
 }
