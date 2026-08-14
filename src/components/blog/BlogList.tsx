@@ -60,7 +60,7 @@ function Pagination({
         </button>
       ) : (
         <Link
-          href={currentPage === 2 ? '/' : `/page/${prevPage}`}
+          href={currentPage === 2 ? '/blog' : `/blog/page/${prevPage}`}
           className={`${
             isPrevDisabled ? navButtonDisabledClass + ' pointer-events-none' : navButtonClass
           }`}
@@ -84,7 +84,7 @@ function Pagination({
         </button>
       ) : (
         <Link
-          href={`/page/${nextPage}`}
+          href={`/blog/page/${nextPage}`}
           className={`${
             isNextDisabled ? navButtonDisabledClass + ' pointer-events-none' : navButtonClass
           }`}

@@ -25,6 +25,15 @@ const nextConfig: NextConfig = {
     // Inline critical CSS to reduce render blocking
     inlineCss: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/page/:pageNum',
+        destination: '/blog/page/:pageNum',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withContentlayer(nextConfig);
