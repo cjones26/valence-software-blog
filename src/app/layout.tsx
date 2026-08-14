@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
-import { cookies } from 'next/headers';
 import { JetBrains_Mono } from 'next/font/google';
 import ThemeProvider from '@/components/ui/ThemeProvider';
 import GoogleAnalytics, { GoogleTagManagerNoScript } from '@/components/analytics/GoogleAnalytics';
-import { THEME_COOKIE_NAME } from '@/lib/theme';
 import './fonts.css';
 import './globals.css';
 
@@ -63,21 +61,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const themeCookie = cookieStore.get(THEME_COOKIE_NAME);
-  const theme = (themeCookie?.value === 'dark' ? 'dark' : 'light') as
-    | 'light'
-    | 'dark';
-
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${theme === 'dark' ? 'dark' : ''}`}
+      className="scroll-smooth"
       suppressHydrationWarning
     >
       <head>
@@ -108,7 +100,7 @@ export default async function RootLayout({
         className={jetbrainsMono.variable}
       >
         <GoogleTagManagerNoScript />
-        <ThemeProvider initialTheme={theme}>{children}</ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
