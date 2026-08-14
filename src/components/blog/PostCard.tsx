@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
 import { formatDateSafe } from '@/lib/dateUtils';
 import Tag from './Tag';
 
@@ -21,7 +20,6 @@ export interface PostCardProps {
 }
 
 export default function PostCard({ post, index }: PostCardProps) {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const formattedDate = formatDateSafe(post.date);
   const validTags = post.tags.filter((tag): tag is string =>
     Boolean(tag && typeof tag === 'string')
@@ -42,7 +40,6 @@ export default function PostCard({ post, index }: PostCardProps) {
             className="object-cover hover:scale-105 transition-transform duration-300"
             placeholder="blur"
             blurDataURL={post.blurDataURL}
-            onLoad={() => setImageLoaded(true)}
             {...(index === 0 && { preload: true })}
             {...(index !== 0 && { loading: index === 1 ? 'eager' : 'lazy' })}
             {...(index !== 0 && {
