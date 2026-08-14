@@ -16,47 +16,46 @@ export default function remarkCallouts() {
   return (tree: Root) => {
     visit(tree, directiveTypes, (node) => {
       const calloutType = node.name
-        const config = calloutConfig[calloutType]
+      const config = calloutConfig[calloutType]
 
-        if (config) {
-          const data = node.data || (node.data = {})
+      if (config) {
+        const data = node.data || (node.data = {})
 
-          const titleNode = {
-            type: 'paragraph',
-            data: {
-              hName: 'div',
-              hProperties: {
-                className: ['callout-title']
-              }
-            },
-            children: [
-              {
-                type: 'text',
-                value: `${config.emoji} ${config.label}`
-              }
-            ]
-          }
-
-          const contentNode = {
-            type: 'div',
-            data: {
-              hName: 'div',
-              hProperties: {
-                className: ['callout-content']
-              }
-            },
-            children: node.children
-          }
-
-          data.hName = 'div'
-          data.hProperties = {
-            className: ['callout', `callout-${calloutType}`],
-            'data-callout': calloutType
-          }
-
-          node.children = [titleNode, contentNode] as typeof node.children
+        const titleNode = {
+          type: 'paragraph',
+          data: {
+            hName: 'div',
+            hProperties: {
+              className: ['callout-title']
+            }
+          },
+          children: [
+            {
+              type: 'text',
+              value: `${config.emoji} ${config.label}`
+            }
+          ]
         }
+
+        const contentNode = {
+          type: 'div',
+          data: {
+            hName: 'div',
+            hProperties: {
+              className: ['callout-content']
+            }
+          },
+          children: node.children
+        }
+
+        data.hName = 'div'
+        data.hProperties = {
+          className: ['callout', `callout-${calloutType}`],
+          'data-callout': calloutType
+        }
+
+        node.children = [titleNode, contentNode] as typeof node.children
       }
-    )
+    })
   }
 }
