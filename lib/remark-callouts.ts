@@ -54,6 +54,10 @@ export default function remarkCallouts() {
           'data-callout': calloutType
         }
 
+        // titleNode/contentNode render as arbitrary HTML via data.hName, an
+        // mdast-util-to-hast escape hatch with no corresponding mdast node
+        // type ('div' isn't a real mdast type), so they can't structurally
+        // match node.children's real element type.
         node.children = [titleNode, contentNode] as typeof node.children
       }
     })

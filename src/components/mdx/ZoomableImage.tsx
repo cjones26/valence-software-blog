@@ -44,8 +44,8 @@ export default function ZoomableImage({ src, alt, title, width, height }: Zoomab
       src={src}
       alt={alt || ''}
       title={title}
-      width={Number(width)}
-      height={Number(height)}
+      width={width}
+      height={height}
       sizes="(max-width: 768px) 100vw, 768px"
       className="cursor-zoom-in mx-auto h-auto max-w-full"
       loading="lazy"
