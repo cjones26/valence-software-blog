@@ -5,14 +5,15 @@ import BackToBlog from '../blog/BackToBlog';
 
 export interface PageLayoutProps {
   children: React.ReactNode;
+  showBackToBlog?: boolean;
 }
 
-export default function PageLayout({ children }: PageLayoutProps) {
+export default function PageLayout({ children, showBackToBlog = true }: PageLayoutProps) {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1 max-w-3xl mx-auto px-4 py-6 md:px-6 md:py-8 w-full">
-        <BackToBlog />
+        {showBackToBlog && <BackToBlog />}
         {children}
       </main>
       <Footer />
