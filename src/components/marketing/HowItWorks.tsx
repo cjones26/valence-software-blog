@@ -1,19 +1,21 @@
-const items = [
+import Reveal from './Reveal';
+
+const principles = [
   {
-    title: 'Fixed price on defined scope.',
-    body: 'You get a number before work starts. No open meter.',
+    title: 'A fixed price.',
+    body: 'You get a number before work starts, based on a scope agreed on up front, rather than an open meter that keeps running the longer things take.',
   },
   {
     title: 'A written statement of work.',
-    body: 'The out-of-scope section is written as carefully as the in-scope section.',
+    body: 'What is out of scope gets written as carefully as what is in scope.',
   },
   {
-    title: 'You get me.',
-    body: 'No account manager, no junior engineer doing the work while someone senior sold it.',
+    title: 'You work with me.',
+    body: 'No account manager, and no junior engineer quietly doing the work after someone senior sold it.',
   },
   {
-    title: 'It keeps running.',
-    body: 'Every project includes a warranty period, and ongoing support is available if you want it.',
+    title: 'Support after launch.',
+    body: 'Every project includes a warranty period, with ongoing support after that if you want it.',
   },
 ];
 
@@ -24,25 +26,27 @@ export default function HowItWorks() {
       aria-labelledby="how-it-works-heading"
       className="bg-slate-50 dark:bg-vs-bg border-t border-slate-200 dark:border-white/10"
     >
-      <div className="max-w-3xl mx-auto px-4 md:px-6 py-14 md:py-20">
-        <h2
-          id="how-it-works-heading"
-          className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 dark:text-white"
-        >
-          How I work
-        </h2>
-        <dl className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
-          {items.map((item) => (
-            <div key={item.title}>
-              <dt className="font-semibold text-slate-900 dark:text-white">
-                {item.title}
-              </dt>
-              <dd className="mt-1 text-[17px] leading-relaxed text-slate-700 dark:text-vs-muted">
-                {item.body}
-              </dd>
-            </div>
+      <div className="max-w-4xl mx-auto px-4 md:px-6 py-16 md:py-24">
+        <Reveal>
+          <h2
+            id="how-it-works-heading"
+            className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white"
+          >
+            How I work
+          </h2>
+        </Reveal>
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+          {principles.map((principle, index) => (
+            <Reveal key={principle.title} delayMs={index * 60}>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                {principle.title}
+              </h3>
+              <p className="mt-2 text-[17px] leading-relaxed text-slate-700 dark:text-vs-muted">
+                {principle.body}
+              </p>
+            </Reveal>
           ))}
-        </dl>
+        </div>
       </div>
     </section>
   );
