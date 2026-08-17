@@ -5,7 +5,6 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-family-sans: 'Fixel', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-family-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
 
   /* Brand tokens, from the printed business card */
   --color-vs-bg-deep: #081219;
@@ -17,8 +16,52 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Fixel', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+@keyframes hero-draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes hero-fade-node {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes atom-nucleus-in {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.atom-orbit {
+  stroke-dasharray: 631;
+  stroke-dashoffset: 631;
+  animation: hero-draw-line 0.35s ease-out forwards;
+}
+
+.atom-nucleus {
+  opacity: 0;
+  transform: scale(0.3);
+  transform-origin: 200px 200px;
+  animation: atom-nucleus-in 0.25s ease-out forwards;
+}
+
+.atom-electron {
+  opacity: 0;
+  animation: hero-fade-node 0.15s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atom-orbit,
+  .atom-nucleus,
+  .atom-electron {
+    animation: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 article.prose {
