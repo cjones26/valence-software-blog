@@ -12,7 +12,7 @@ export default function PageLayout({ children, showBackToBlog = true }: PageLayo
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 max-w-3xl mx-auto px-4 md:px-6 section-padding w-full">
+      <main className="flex-1 max-w-3xl mx-auto px-4 md:px-6 py-12 md:py-20 w-full">
         {showBackToBlog && <BackToBlog />}
         {children}
       </main>
