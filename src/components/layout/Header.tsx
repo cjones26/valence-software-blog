@@ -48,9 +48,9 @@ export default function Header({ searchQuery = '', onSearchChange, onReset }: He
                 </div>
               </div>
             </div>
-            <h1 className="hidden sm:block text-lg md:text-xl lg:text-2xl font-bold tracking-tight m-0 leading-none text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            <p className="hidden sm:block text-lg md:text-xl lg:text-2xl font-bold tracking-tight m-0 leading-none text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
               Valence Software
-            </h1>
+            </p>
           </Link>
 
           {/* Navigation and Utilities */}
@@ -58,23 +58,31 @@ export default function Header({ searchQuery = '', onSearchChange, onReset }: He
             {/* Navigation Links */}
             <nav className="flex items-center gap-3 md:gap-4">
               <Link
-                href="/"
-                className="hidden md:block text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                href="/#services"
+                className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
+              >
+                Services
+              </Link>
+              <Link
+                href="/about"
+                prefetch={false}
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
+              >
+                About
+              </Link>
+              <Link
+                href="/blog"
+                prefetch={false}
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
                 onClick={onReset}
               >
                 Blog
               </Link>
               <Link
-                href="/tags"
-                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
+                href="/#contact"
+                className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
               >
-                Tags
-              </Link>
-              <Link
-                href="/about"
-                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
-              >
-                About
+                Contact
               </Link>
             </nav>
 

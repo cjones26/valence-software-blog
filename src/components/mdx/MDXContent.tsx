@@ -13,5 +13,9 @@ const components = {
 
 export default function MDXContent({ code }: MDXContentProps) {
   const Component = useMDXComponent(code);
+  // react-hooks/static-components requires JSX tags to resolve to a
+  // statically-declared component. Rendering compiled MDX from a string is
+  // inherently dynamic. Confirmed even an explicit useMemo doesn't satisfy it.
+  // eslint-disable-next-line react-hooks/static-components
   return <Component components={components} />;
 }
