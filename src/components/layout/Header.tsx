@@ -18,11 +18,7 @@ export default function Header({ searchQuery = '', onSearchChange, onReset }: He
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
-    <header className="relative transition-all duration-300">
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-0.5 bg-[linear-gradient(90deg,var(--color-vs-blue),var(--color-vs-cyan))]"
-        aria-hidden="true"
-      />
+    <header className="border-b border-blue-200 dark:border-slate-700 transition-all duration-300">
       <div className="px-4 md:px-6 py-3 md:py-4">
         {/* Top Row */}
         <div className="flex items-center justify-between gap-3 md:gap-4">

@@ -24,7 +24,7 @@ export default function Contact() {
         className="pointer-events-none absolute -top-32 -right-32 h-96 w-96 rounded-full opacity-20 blur-3xl bg-[linear-gradient(135deg,var(--color-vs-blue),var(--color-vs-cyan))]"
         aria-hidden="true"
       />
-      <div className="relative max-w-3xl mx-auto px-4 md:px-6 py-16 md:py-24">
+      <div className="relative max-w-3xl mx-auto px-4 md:px-6 section-padding">
         <Reveal>
           <h2
             id="contact-heading"

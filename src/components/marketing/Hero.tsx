@@ -4,7 +4,7 @@ import AtomGraphic from './AtomGraphic';
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-white dark:bg-vs-bg-deep">
-      <div className="relative max-w-6xl mx-auto px-4 md:px-6 pt-10 pb-14 md:pt-14 md:pb-24 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center">
+      <div className="relative max-w-6xl mx-auto px-4 md:px-6 pt-16 pb-14 md:pt-24 md:pb-24 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center">
         <div>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-slate-900 dark:text-white">
             Custom software for businesses that outgrew the spreadsheet

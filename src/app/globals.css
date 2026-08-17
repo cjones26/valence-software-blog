@@ -16,6 +16,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+.section-padding {
+  @apply py-12 md:py-20;
+}
+
 @keyframes hero-draw-line {
   to {
     stroke-dashoffset: 0;
