@@ -65,14 +65,12 @@ export default function Header({ searchQuery = '', onSearchChange, onReset }: He
               </Link>
               <Link
                 href="/about"
-                prefetch={false}
                 className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
               >
                 About
               </Link>
               <Link
                 href="/blog"
-                prefetch={false}
                 className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
                 onClick={onReset}
               >
