@@ -5,9 +5,9 @@ import GoogleAnalytics, { GoogleTagManagerNoScript } from '@/components/analytic
 import './fonts.css';
 import './globals.css';
 
-const SITE_TITLE = 'Valence Software | Software Engineering Blog';
+const SITE_TITLE = 'Valence Software | Custom Software and Technology Consulting';
 const SITE_DESCRIPTION =
-  'A software engineering blog covering practical programming tutorials, systems architecture, JavaScript development, and real-world solutions for working engineers. Insights on code quality, performance optimization, and modern web development.';
+  'Custom software, integrations, and automation for businesses that have outgrown spreadsheets and off-the-shelf tools. Serving Virginia Beach, Norfolk, Chesapeake, and Hampton Roads.';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -23,14 +23,13 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   keywords: [
-    'software engineering',
-    'blog',
-    'programming',
-    'JavaScript',
-    'web development',
-    'systems programming',
-    'tutorials',
-    'code optimization',
+    'custom software development',
+    'software consultant',
+    'business automation',
+    'system integration',
+    'internal tools',
+    'Virginia Beach software developer',
+    'Hampton Roads software consultant',
   ],
   authors: [{ name: 'Charles Jones' }],
   metadataBase: new URL('https://valencesoftware.io'),
@@ -46,10 +45,10 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: '/valence-logo-1024-1024.png',
-        width: 1024,
-        height: 1024,
-        alt: 'Valence Software Logo',
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Valence Software',
       },
     ],
   },
@@ -57,8 +56,26 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ['/valence-logo-1024-1024.png'],
+    images: ['/og-image.png'],
   },
+};
+
+const PROFESSIONAL_SERVICE_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Valence Software',
+  url: 'https://valencesoftware.io',
+  image: 'https://valencesoftware.io/og-image.png',
+  description: SITE_DESCRIPTION,
+  founder: {
+    '@type': 'Person',
+    name: 'Charles Jones',
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Virginia Beach, VA' },
+    { '@type': 'City', name: 'Norfolk, VA' },
+    { '@type': 'City', name: 'Chesapeake, VA' },
+  ],
 };
 
 export default function RootLayout({
@@ -75,10 +92,12 @@ export default function RootLayout({
       <head>
         <link rel="preload" href="/fonts/FixelText-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/FixelText-SemiBold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preload" href="/fonts/FixelText-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <GoogleAnalytics />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(PROFESSIONAL_SERVICE_JSON_LD) }}
+        />
         <style
           dangerouslySetInnerHTML={{
             __html: `
