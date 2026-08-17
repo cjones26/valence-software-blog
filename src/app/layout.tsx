@@ -7,7 +7,7 @@ import './globals.css';
 
 const SITE_TITLE = 'Valence Software | Custom Software and Technology Consulting';
 const SITE_DESCRIPTION =
-  'Custom software, integrations, and automation for businesses that have outgrown spreadsheets and off-the-shelf tools. Serving Virginia Beach, Norfolk, Chesapeake, and Hampton Roads.';
+  'Custom software, integrations, and automation for businesses that have outgrown spreadsheets and off-the-shelf tools. Serving Hampton Roads, Virginia.';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -75,6 +75,10 @@ const PROFESSIONAL_SERVICE_JSON_LD = {
     { '@type': 'City', name: 'Virginia Beach, VA' },
     { '@type': 'City', name: 'Norfolk, VA' },
     { '@type': 'City', name: 'Chesapeake, VA' },
+    { '@type': 'City', name: 'Portsmouth, VA' },
+    { '@type': 'City', name: 'Suffolk, VA' },
+    { '@type': 'City', name: 'Newport News, VA' },
+    { '@type': 'City', name: 'Hampton, VA' },
   ],
 };
 
