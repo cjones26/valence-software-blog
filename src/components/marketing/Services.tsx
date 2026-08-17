@@ -42,7 +42,7 @@ export default function Services() {
       aria-labelledby="services-heading"
       className="bg-slate-50 dark:bg-vs-bg border-t border-slate-200 dark:border-white/10"
     >
-      <div className="max-w-5xl mx-auto px-4 md:px-6 py-16 md:py-24">
+      <div className="max-w-5xl mx-auto px-4 md:px-6 section-padding">
         <Reveal>
           <h2
             id="services-heading"

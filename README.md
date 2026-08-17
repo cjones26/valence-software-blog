@@ -39,6 +39,11 @@ npm run build   # contentlayer2 build && next build
 npm start
 ```
 
+Commit messages and PR titles must follow [Conventional Commits](https://www.conventionalcommits.org/)
+(`feat:`, `fix:`, `chore:`, etc.) — enforced locally by a commitlint husky
+hook and on GitHub by a PR title check. Squash merge only; the PR title
+becomes the commit on `main`.
+
 ## Configuration
 
 ### Giscus comments
@@ -64,7 +69,7 @@ they change.
 
 ## Deployment
 
-Deploys to [Netlify](https://app.netlify.com/projects/valence-software-blog)
+Deploys to [Netlify](https://app.netlify.com/projects/valence-software)
 (`valencesoftware.io`). Every route is statically prerendered, so this is a
 plain static-site deploy with no functions/SSR involved — `npm run build`
 produces the full output, no adapter needed. Any static-friendly host works
@@ -114,12 +119,14 @@ src/
 │   └── layout.tsx                     # root layout
 ├── components/
 │   ├── layout/                        # Header, Footer, PageLayout, BlogLayout
+│   ├── marketing/                     # homepage sections (Hero, Services, Contact, etc.)
 │   ├── blog/                          # post cards, list, tags, back-to-blog
 │   ├── mdx/                           # MDX rendering components
 │   ├── search/                        # blog-only search UI
+│   ├── analytics/                     # Google Analytics/Tag Manager
 │   └── ui/                            # theme toggle, comments, theme provider
 content/posts/YYYY/<slug>/index.mdx    # blog content
-public/fonts/                          # Fixel Text + Source Serif 4 (self-hosted)
+public/fonts/                          # Fixel Text (self-hosted)
 ```
 
 ## License
