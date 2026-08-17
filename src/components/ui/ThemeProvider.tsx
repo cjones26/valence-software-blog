@@ -34,7 +34,7 @@ interface ThemeProviderProps {
 }
 
 export default function ThemeProvider({ children }: ThemeProviderProps) {
-  // The page is prerendered as static HTML with no server-known theme; the
+  // The page is prerendered as static HTML with no server-known theme. The
   // inline script in the document head sets the DOM class before paint.
   // useSyncExternalStore reads that same cookie without a hydration mismatch:
   // React uses getServerSnapshot for the first client render, then commits

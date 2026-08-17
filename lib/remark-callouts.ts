@@ -1,8 +1,6 @@
 import { visit } from 'unist-util-visit'
 import type { Root } from 'mdast'
 
-const directiveTypes = ['containerDirective', 'leafDirective', 'textDirective'] as const
-
 const calloutConfig: Record<string, { emoji: string; label: string }> = {
   note: { emoji: '📝', label: 'Note' },
   info: { emoji: 'ℹ️', label: 'Info' },
@@ -14,7 +12,9 @@ const calloutConfig: Record<string, { emoji: string; label: string }> = {
 
 export default function remarkCallouts() {
   return (tree: Root) => {
-    visit(tree, directiveTypes, (node) => {
+    visit(tree, (node) => {
+      if (node.type !== 'containerDirective' && node.type !== 'leafDirective' && node.type !== 'textDirective') return
+
       const calloutType = node.name
       const config = calloutConfig[calloutType]
 

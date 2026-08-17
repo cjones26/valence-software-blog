@@ -8,11 +8,6 @@ interface RevealProps {
   delayMs?: number;
 }
 
-// Opacity/transform are driven by inline style, not toggled Tailwind
-// classes: those classes only ever appear in the DOM after this client
-// effect runs, never in any server-rendered HTML, so Next's critical-CSS
-// pruning (optimizeCss/inlineCss, next.config.ts) strips their rules from
-// the build entirely. Inline styles bypass that.
 export default function Reveal({ children, className, delayMs = 0 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);

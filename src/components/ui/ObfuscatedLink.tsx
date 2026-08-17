@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface ObfuscatedLinkProps {
   /** base64 of the real value: an email address, or a phone number in E.164 (+1XXXXXXXXXX) */
@@ -16,23 +16,19 @@ function formatDisplay(scheme: ObfuscatedLinkProps['scheme'], decoded: string): 
 }
 
 export default function ObfuscatedLink({ encoded, scheme, className }: ObfuscatedLinkProps) {
-  const [decoded, setDecoded] = useState('');
+  const ref = useRef<HTMLAnchorElement>(null);
 
-  // The real address/number must be absent from the prerendered HTML (that's
-  // the point: keep it out of what scrapers read), so it can only be filled
-  // in after mount, not derived during render.
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- see comment above
-    setDecoded(atob(encoded));
-  }, [encoded]);
-
-  if (!decoded) {
-    return <span className={className}>Loading…</span>;
-  }
+    const node = ref.current;
+    if (!node) return;
+    const decoded = atob(encoded);
+    node.href = `${scheme}:${decoded}`;
+    node.textContent = formatDisplay(scheme, decoded);
+  }, [encoded, scheme]);
 
   return (
-    <a href={`${scheme}:${decoded}`} className={className}>
-      {formatDisplay(scheme, decoded)}
+    <a ref={ref} className={className}>
+      Loading…
     </a>
   );
 }
