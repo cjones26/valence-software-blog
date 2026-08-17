@@ -11,7 +11,7 @@ export default function WhoIAm() {
         className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full opacity-20 blur-3xl bg-[linear-gradient(135deg,var(--color-vs-blue),var(--color-vs-cyan))]"
         aria-hidden="true"
       />
-      <div className="relative max-w-5xl mx-auto px-4 md:px-6 py-16 md:py-24">
+      <div className="relative max-w-5xl mx-auto px-4 md:px-6 section-padding">
         <Reveal>
           <h2
             id="who-i-am-heading"
