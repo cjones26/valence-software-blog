@@ -69,12 +69,11 @@ they change.
 
 ## Deployment
 
-Deploys to [Netlify](https://app.netlify.com/projects/valence-software)
-(`valencesoftware.io`). Every route is statically prerendered, so this is a
-plain static-site deploy with no functions/SSR involved — `npm run build`
-produces the full output, no adapter needed. Any static-friendly host works
-the same way (Netlify, Cloudflare Pages, etc.); Vercel would also work but
-isn't required for anything here.
+Deploys to Cloudflare Workers (static assets) at `valencesoftware.io`. Every
+route is statically prerendered, so this is a plain static-site deploy with
+no functions/SSR involved — `npm run build` produces the full output in
+`out/`, no adapter needed. Any static-friendly host works the same way
+(Cloudflare, Netlify, Vercel, etc.).
 
 ## Adding blog posts
 
