@@ -19,7 +19,7 @@ export default function Header({ searchQuery = '', onSearchChange, onReset }: He
 
   return (
     <header className="border-b border-blue-200 dark:border-slate-700 transition-all duration-300">
-      <div className="px-5 md:px-6 py-3 md:py-4">
+      <div className="px-6 py-3 md:py-4">
         {/* Top Row */}
         <div className="flex items-center justify-between gap-3 md:gap-4">
           {/* Logo and Title */}
