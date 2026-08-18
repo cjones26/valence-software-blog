@@ -10,7 +10,7 @@ export default function Comments() {
   return (
     <div className="mt-8">
       <Giscus
-        repo="cjones26/valence-software-blog"
+        repo="cjones26/valence-software-website"
         repoId="R_kgDOQNRjFg"
         category="Announcements"
         categoryId="DIC_kwDOQNRjFs4CxVH0"
