@@ -3,10 +3,12 @@ import { withContentlayer } from 'next-contentlayer2';
 
 const nextConfig: NextConfig = {
   /* config options here */
+  output: 'export',
   reactCompiler: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   turbopack: {},
   images: {
+    unoptimized: true,
     qualities: [75, 90, 100],
   },
   // Enable compression
@@ -25,29 +27,9 @@ const nextConfig: NextConfig = {
     // Inline critical CSS to reduce render blocking
     inlineCss: true,
   },
-  async redirects() {
-    return [
-      {
-        source: '/page/:pageNum',
-        destination: '/blog/page/:pageNum',
-        permanent: true,
-      },
-    ];
-  },
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-Frame-Options', value: 'DENY' },
-          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
-          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains' },
-        ],
-      },
-    ];
-  },
+  // redirects()/headers() aren't supported with output: 'export' (Next
+  // errors at build time if present) - moved to public/_redirects and
+  // public/_headers, which both Netlify and Cloudflare Pages read directly.
 };
 
 export default withContentlayer(nextConfig);
