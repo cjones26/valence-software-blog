@@ -8,29 +8,41 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Get all published posts
   const publishedPosts = allPosts.filter(post => post.published)
 
-  // Get all unique tags from published posts
-  const allTags = publishedPosts.reduce((tags, post) => {
-    post.tags?.forEach(tag => tags.add(tag))
-    return tags
-  }, new Set<string>())
+  // Most recent post date - used as lastModified for pages whose content
+  // changes when a new post is published, rather than build time
+  const postDates = publishedPosts.map(post => parseDateSafe(post.date))
+  const mostRecentPostDate = postDates.length
+    ? new Date(Math.max(...postDates.map(d => d.getTime())))
+    : undefined
+
+  // Most recent post date per tag, for accurate tag-page lastModified
+  const tagLastModified = new Map<string, Date>()
+  publishedPosts.forEach(post => {
+    const postDate = parseDateSafe(post.date)
+    post.tags?.forEach(tag => {
+      const existing = tagLastModified.get(tag)
+      if (!existing || postDate.getTime() > existing.getTime()) {
+        tagLastModified.set(tag, postDate)
+      }
+    })
+  })
 
   // Homepage and static pages
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: mostRecentPostDate,
       changeFrequency: 'daily',
       priority: 1.0,
     },
     {
       url: `${baseUrl}/about`,
-      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified: new Date(),
+      lastModified: mostRecentPostDate,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
@@ -44,10 +56,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  // Tag pages
-  const tagPages: MetadataRoute.Sitemap = Array.from(allTags).map((tag) => ({
+  // Tag pages - lastModified reflects the newest post carrying that tag
+  const tagPages: MetadataRoute.Sitemap = Array.from(tagLastModified.entries()).map(([tag, lastModified]) => ({
     url: `${baseUrl}/tags/${encodeURIComponent(tag)}`,
-    lastModified: new Date(),
+    lastModified,
     changeFrequency: 'weekly' as const,
     priority: 0.6,
   }))
