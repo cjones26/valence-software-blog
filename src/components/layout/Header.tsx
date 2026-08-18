@@ -19,7 +19,7 @@ export default function Header({ searchQuery = '', onSearchChange, onReset }: He
 
   return (
     <header className="border-b border-blue-200 dark:border-slate-700 transition-all duration-300">
-      <div className="px-4 md:px-6 py-3 md:py-4">
+      <div className="px-6 py-3 md:py-4">
         {/* Top Row */}
         <div className="flex items-center justify-between gap-3 md:gap-4">
           {/* Logo and Title */}
@@ -65,14 +65,12 @@ export default function Header({ searchQuery = '', onSearchChange, onReset }: He
               </Link>
               <Link
                 href="/about"
-                prefetch={false}
                 className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
               >
                 About
               </Link>
               <Link
                 href="/blog"
-                prefetch={false}
                 className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
                 onClick={onReset}
               >

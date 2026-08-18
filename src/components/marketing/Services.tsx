@@ -42,7 +42,7 @@ export default function Services() {
       aria-labelledby="services-heading"
       className="bg-slate-50 dark:bg-vs-bg border-t border-slate-200 dark:border-white/10"
     >
-      <div className="max-w-5xl mx-auto px-4 md:px-6 py-12 md:py-20">
+      <div className="max-w-5xl mx-auto px-6 py-12 md:py-20">
         <Reveal>
           <h2
             id="services-heading"
@@ -53,17 +53,23 @@ export default function Services() {
         </Reveal>
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">
           {services.map(({ title, body, icon: Icon }, index) => (
-            <Reveal key={title} delayMs={index * 60} className="flex flex-col items-center text-center">
+            <Reveal
+              key={title}
+              delayMs={index * 60}
+              className="flex flex-row items-start gap-3 text-left sm:flex-col sm:items-center sm:gap-0 sm:text-center"
+            >
               <Icon
-                className="w-6 h-6 text-vs-blue dark:text-vs-cyan"
+                className="w-6 h-6 shrink-0 mt-1 sm:mt-0 text-vs-blue dark:text-vs-cyan"
                 aria-hidden="true"
               />
-              <h3 className="mt-3 text-lg font-bold text-slate-900 dark:text-white">
-                {title}
-              </h3>
-              <p className="mt-1 text-[17px] leading-relaxed text-slate-700 dark:text-vs-muted">
-                {body}
-              </p>
+              <div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white sm:mt-3">
+                  {title}
+                </h3>
+                <p className="mt-1 text-[17px] leading-relaxed text-slate-700 dark:text-vs-muted">
+                  {body}
+                </p>
+              </div>
             </Reveal>
           ))}
         </div>
