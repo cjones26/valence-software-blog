@@ -2,7 +2,7 @@ import AtomElectron from './AtomElectron';
 
 export default function AtomGraphic() {
   return (
-    <div className="relative hidden lg:block aspect-square rounded-2xl bg-vs-bg-deep overflow-hidden">
+    <div className="relative aspect-square w-full max-w-[180px] mx-auto lg:max-w-none rounded-2xl bg-vs-bg-deep overflow-hidden">
       <svg
         viewBox="0 0 400 400"
         className="absolute inset-0 w-full h-full"
