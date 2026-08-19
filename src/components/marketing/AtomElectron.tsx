@@ -40,14 +40,13 @@ export default function AtomElectron({ angle, delay, duration, endpoint, directi
 
   return (
     <g transform={`rotate(${angle} 200 200)`}>
-      <circle
-        className="atom-electron"
-        cx={REST_X[endpoint]}
-        cy="200"
-        r="6"
-        fill={`url(#${fillId})`}
-        style={{ animationDelay: `${delay}s` }}
-      >
+      {/* animateMotion and the CSS entrance animation both animate via
+          `transform`, and applying both to the same element makes them
+          fight over it (the CSS keyframe visibly wins until it finishes,
+          so the motion sweep only becomes visible after the entrance
+          completes). Give each its own element instead: this <g> takes
+          the motion transform, the circle takes the CSS one. */}
+      <g>
         {isAnimated && (
           <animateMotion
             path={ORBIT_PATHS[endpoint][direction]}
@@ -59,7 +58,15 @@ export default function AtomElectron({ angle, delay, duration, endpoint, directi
             keySplines="0.4 0 0.2 1"
           />
         )}
-      </circle>
+        <circle
+          className="atom-electron"
+          cx={REST_X[endpoint]}
+          cy="200"
+          r="6"
+          fill={`url(#${fillId})`}
+          style={{ animationDelay: `${delay}s` }}
+        />
+      </g>
     </g>
   );
 }
