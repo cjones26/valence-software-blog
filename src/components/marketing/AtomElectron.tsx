@@ -60,6 +60,7 @@ export default function AtomElectron({ angle, delay, duration, endpoint, directi
             dur={`${duration}s`}
             fill="freeze"
             calcMode="spline"
+            keyPoints="0;1"
             keyTimes="0;1"
             keySplines="0.4 0 0.2 1"
           />
