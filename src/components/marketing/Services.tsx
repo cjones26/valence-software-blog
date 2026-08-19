@@ -40,7 +40,7 @@ export default function Services() {
     <section
       id="services"
       aria-labelledby="services-heading"
-      className="bg-slate-50 dark:bg-vs-bg border-t border-slate-200 dark:border-white/10"
+      className="bg-slate-100 dark:bg-vs-bg border-t border-slate-200 dark:border-white/10"
     >
       <div className="max-w-5xl mx-auto px-6 py-12 md:py-20">
         <Reveal>
@@ -48,7 +48,7 @@ export default function Services() {
             id="services-heading"
             className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white"
           >
-            What I do
+            Services
           </h2>
         </Reveal>
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">

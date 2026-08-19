@@ -2,7 +2,7 @@ import { FaGithub, FaLinkedin, FaStackOverflow } from 'react-icons/fa';
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-center px-6 py-8 border-t border-blue-200 dark:border-slate-700 mt-auto">
+    <footer className="flex flex-col items-center px-6 py-8 border-t border-blue-200 dark:border-slate-700 bg-slate-50 dark:bg-vs-bg-deep mt-auto">
       <ul className="flex items-center gap-6 list-none p-0 m-0 mb-6">
         <li>
           <a

@@ -7,6 +7,7 @@ import LightDarkToggle from '../ui/LightDarkToggle';
 import SearchToggle from '../search/SearchToggle';
 import MobileSearchInput from '../search/MobileSearchInput';
 import SearchInput from '../search/SearchInput';
+import { scrollToAnchorOnClick } from '@/lib/scrollToAnchor';
 
 interface HeaderProps {
   searchQuery?: string;
@@ -59,6 +60,7 @@ export default function Header({ searchQuery = '', onSearchChange, onReset }: He
             <nav className="flex items-center gap-3 md:gap-4">
               <Link
                 href="/#services"
+                onClick={scrollToAnchorOnClick('services')}
                 className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
               >
                 Services
@@ -78,6 +80,7 @@ export default function Header({ searchQuery = '', onSearchChange, onReset }: He
               </Link>
               <Link
                 href="/#contact"
+                onClick={scrollToAnchorOnClick('contact')}
                 className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
               >
                 Contact

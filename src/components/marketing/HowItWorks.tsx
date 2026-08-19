@@ -30,7 +30,7 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       aria-labelledby="how-it-works-heading"
-      className="bg-slate-50 dark:bg-vs-bg border-t border-slate-200 dark:border-white/10"
+      className="bg-slate-100 dark:bg-vs-bg border-t border-slate-200 dark:border-white/10"
     >
       <div className="max-w-4xl mx-auto px-6 py-12 md:py-20">
         <Reveal>
@@ -43,7 +43,11 @@ export default function HowItWorks() {
         </Reveal>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
           {principles.map(({ title, body, icon: Icon }, index) => (
-            <Reveal key={title} delayMs={index * 60} className="flex flex-row items-start gap-3">
+            <Reveal
+              key={title}
+              delayMs={index * 60}
+              className="flex flex-row items-start gap-3"
+            >
               <Icon
                 className="w-6 h-6 shrink-0 mt-1 text-vs-blue dark:text-vs-cyan"
                 aria-hidden="true"
