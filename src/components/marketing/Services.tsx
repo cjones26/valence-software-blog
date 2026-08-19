@@ -48,7 +48,7 @@ export default function Services() {
             id="services-heading"
             className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white"
           >
-            What I do
+            Services
           </h2>
         </Reveal>
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">

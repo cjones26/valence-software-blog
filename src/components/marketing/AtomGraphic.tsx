@@ -27,7 +27,7 @@ export default function AtomGraphic({ variant = 'card' }: AtomGraphicProps) {
       }
     >
       <svg
-        viewBox="0 0 400 400"
+        viewBox="30 30 340 340"
         className="absolute inset-0 w-full h-full"
         aria-hidden="true"
       >
