@@ -90,12 +90,18 @@ export default function AtomGraphic({ variant = 'card' }: AtomGraphicProps) {
           />
         </g>
 
-        <AtomElectron angle={90} endpoint="far" direction="cw" delay={0.3} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
-        <AtomElectron angle={90} endpoint="near" direction="cw" delay={0.3} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
-        <AtomElectron angle={150} endpoint="far" direction="ccw" delay={0.38} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
-        <AtomElectron angle={150} endpoint="near" direction="ccw" delay={0.38} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
-        <AtomElectron angle={210} endpoint="far" direction="cw" delay={0.46} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
-        <AtomElectron angle={210} endpoint="near" direction="cw" delay={0.46} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
+        {/* Only these two rest positions land inside the background
+            variant's clipped crop - the other four sweep or rest off-canvas. */}
+        <AtomElectron angle={90} endpoint="far" direction="cw" delay={0.3} duration={0.6} fillId={nucleusGradId} />
+        <AtomElectron angle={150} endpoint="far" direction="ccw" delay={0.38} duration={0.6} fillId={nucleusGradId} />
+        {!isBackground && (
+          <>
+            <AtomElectron angle={90} endpoint="near" direction="cw" delay={0.3} duration={0.6} fillId={nucleusGradId} />
+            <AtomElectron angle={150} endpoint="near" direction="ccw" delay={0.38} duration={0.6} fillId={nucleusGradId} />
+            <AtomElectron angle={210} endpoint="far" direction="cw" delay={0.46} duration={0.6} fillId={nucleusGradId} />
+            <AtomElectron angle={210} endpoint="near" direction="cw" delay={0.46} duration={0.6} fillId={nucleusGradId} />
+          </>
+        )}
 
         <g className="atom-nucleus" style={{ animationDelay: '0.2s' }}>
           <circle
