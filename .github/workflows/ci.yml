@@ -24,6 +24,9 @@ jobs:
 
       - run: npm run lint
 
-      - run: npm run typecheck
-
+      # Type errors fail this too (Next.js type-checks the whole project as
+      # part of `next build`), so a separate `typecheck` step here would be
+      # redundant with `build` and would also break on `tsc --noEmit` alone:
+      # `contentlayer/generated` doesn't exist until contentlayer2's codegen
+      # runs, which only happens as the first half of the `build` script.
       - run: npm run build
