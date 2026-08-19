@@ -11,6 +11,8 @@ interface AtomElectronProps {
   /** Rotational direction; same-orbit far/near pairs must share a direction
    *  to stay antipodal the whole lap and never collide. */
   direction: 'cw' | 'ccw';
+  /** Sweep along the orbit path on entrance; false just fades/scales in at rest. */
+  sweep: boolean;
   /** id of the radialGradient (defined by the parent AtomGraphic) to fill with. */
   fillId: string;
 }
@@ -27,12 +29,15 @@ const ORBIT_PATHS = {
 };
 const REST_X = { far: 340, near: 60 };
 
-export default function AtomElectron({ angle, delay, duration, endpoint, direction, fillId }: AtomElectronProps) {
-  const [isAnimated, setIsAnimated] = useState(false);
+export default function AtomElectron({ angle, delay, duration, endpoint, direction, sweep, fillId }: AtomElectronProps) {
+  // Defaults to false so animateMotion renders from the first paint instead
+  // of being added a tick after mount; only removed post-mount for the rare
+  // reduced-motion visitor.
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handleChange = () => setIsAnimated(!query.matches);
+    const handleChange = () => setReducedMotion(query.matches);
     handleChange();
     query.addEventListener('change', handleChange);
     return () => query.removeEventListener('change', handleChange);
@@ -40,14 +45,15 @@ export default function AtomElectron({ angle, delay, duration, endpoint, directi
 
   return (
     <g transform={`rotate(${angle} 200 200)`}>
-      {/* animateMotion and the CSS entrance animation both animate via
-          `transform`, and applying both to the same element makes them
-          fight over it (the CSS keyframe visibly wins until it finishes,
-          so the motion sweep only becomes visible after the entrance
-          completes). Give each its own element instead: this <g> takes
-          the motion transform, the circle takes the CSS one. */}
-      <g>
-        {isAnimated && (
+      {sweep && !reducedMotion ? (
+        <circle
+          className="atom-electron"
+          cx={REST_X[endpoint]}
+          cy="200"
+          r="6"
+          fill={`url(#${fillId})`}
+          style={{ animationDelay: `${delay}s` }}
+        >
           <animateMotion
             path={ORBIT_PATHS[endpoint][direction]}
             begin={`${delay}s`}
@@ -57,7 +63,8 @@ export default function AtomElectron({ angle, delay, duration, endpoint, directi
             keyTimes="0;1"
             keySplines="0.4 0 0.2 1"
           />
-        )}
+        </circle>
+      ) : (
         <circle
           className="atom-electron"
           cx={REST_X[endpoint]}
@@ -66,7 +73,7 @@ export default function AtomElectron({ angle, delay, duration, endpoint, directi
           fill={`url(#${fillId})`}
           style={{ animationDelay: `${delay}s` }}
         />
-      </g>
+      )}
     </g>
   );
 }
