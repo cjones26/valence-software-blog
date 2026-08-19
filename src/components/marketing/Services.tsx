@@ -40,13 +40,9 @@ export default function Services() {
     <section
       id="services"
       aria-labelledby="services-heading"
-      className="relative overflow-hidden bg-slate-100 dark:bg-vs-bg border-t border-slate-200 dark:border-white/10"
+      className="bg-slate-100 dark:bg-vs-bg border-t border-slate-200 dark:border-white/10"
     >
-      <div
-        className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full opacity-30 blur-3xl bg-[linear-gradient(135deg,var(--color-vs-blue),var(--color-vs-cyan))] lg:hidden"
-        aria-hidden="true"
-      />
-      <div className="relative max-w-5xl mx-auto px-6 py-12 md:py-20">
+      <div className="max-w-5xl mx-auto px-6 py-12 md:py-20">
         <Reveal>
           <h2
             id="services-heading"

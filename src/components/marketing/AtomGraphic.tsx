@@ -1,22 +1,53 @@
+import { useId } from 'react';
 import AtomElectron from './AtomElectron';
 
-export default function AtomGraphic() {
+interface AtomGraphicProps {
+  /** 'card' (default): the animated foreground card, as used on desktop.
+   *  'background': a large, faint, static watermark for behind mobile hero text. */
+  variant?: 'card' | 'background';
+}
+
+export default function AtomGraphic({ variant = 'card' }: AtomGraphicProps) {
+  const isBackground = variant === 'background';
+  // Both variants can be mounted in the DOM at once (one just display:none at
+  // the current breakpoint), so gradient/filter ids must be unique per
+  // instance - duplicate SVG ids break url(#id) paint-server resolution.
+  const uid = useId();
+  const lineGradId = `heroLineGrad-${uid}`;
+  const nucleusGradId = `heroNucleusGrad-${uid}`;
+  const nucleusGlowGradId = `heroNucleusGlowGrad-${uid}`;
+  const nucleusBlurId = `heroNucleusBlur-${uid}`;
+
   return (
-    <div className="relative aspect-square w-full max-w-[180px] mx-auto lg:max-w-none rounded-2xl bg-vs-bg-deep overflow-hidden">
+    <div
+      className={
+        isBackground
+          ? 'relative w-[640px] h-[640px] max-w-none opacity-[0.35]'
+          : 'relative aspect-square w-full max-w-none rounded-2xl dark:bg-vs-bg-deep overflow-hidden'
+      }
+    >
       <svg
         viewBox="0 0 400 400"
         className="absolute inset-0 w-full h-full"
         aria-hidden="true"
       >
         <defs>
-          <linearGradient id="heroLineGrad" x1="0" y1="1" x2="1" y2="0">
+          <linearGradient id={lineGradId} x1="0" y1="1" x2="1" y2="0">
             <stop offset="0" stopColor="var(--color-vs-blue)" />
             <stop offset="1" stopColor="var(--color-vs-cyan)" />
           </linearGradient>
-          <radialGradient id="heroNucleusGrad" cx="35%" cy="35%" r="65%">
-            <stop offset="0" stopColor="var(--color-vs-cyan)" />
+          <radialGradient id={nucleusGradId} cx="32%" cy="28%" r="70%">
+            <stop offset="0" stopColor="#7eeef2" />
+            <stop offset="0.35" stopColor="var(--color-vs-cyan)" />
             <stop offset="1" stopColor="var(--color-vs-blue)" />
           </radialGradient>
+          <radialGradient id={nucleusGlowGradId} cx="50%" cy="50%" r="50%">
+            <stop offset="0" stopColor="var(--color-vs-cyan)" stopOpacity="0.55" />
+            <stop offset="1" stopColor="var(--color-vs-cyan)" stopOpacity="0" />
+          </radialGradient>
+          <filter id={nucleusBlurId} x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="6" />
+          </filter>
         </defs>
 
         <ellipse
@@ -25,7 +56,7 @@ export default function AtomGraphic() {
           cy="200"
           rx="140"
           ry="50"
-          stroke="url(#heroLineGrad)"
+          stroke={`url(#${lineGradId})`}
           strokeWidth="1.5"
           fill="none"
           opacity="0.6"
@@ -38,7 +69,7 @@ export default function AtomGraphic() {
           cy="200"
           rx="140"
           ry="50"
-          stroke="url(#heroLineGrad)"
+          stroke={`url(#${lineGradId})`}
           strokeWidth="1.5"
           fill="none"
           opacity="0.6"
@@ -51,7 +82,7 @@ export default function AtomGraphic() {
           cy="200"
           rx="140"
           ry="50"
-          stroke="url(#heroLineGrad)"
+          stroke={`url(#${lineGradId})`}
           strokeWidth="1.5"
           fill="none"
           opacity="0.6"
@@ -59,21 +90,24 @@ export default function AtomGraphic() {
           style={{ animationDelay: '0.16s' }}
         />
 
-        <AtomElectron angle={90} endpoint="far" direction="cw" delay={0.3} duration={0.6} />
-        <AtomElectron angle={90} endpoint="near" direction="cw" delay={0.3} duration={0.6} />
-        <AtomElectron angle={150} endpoint="far" direction="ccw" delay={0.3} duration={0.6} />
-        <AtomElectron angle={150} endpoint="near" direction="ccw" delay={0.3} duration={0.6} />
-        <AtomElectron angle={210} endpoint="far" direction="cw" delay={0.3} duration={0.6} />
-        <AtomElectron angle={210} endpoint="near" direction="cw" delay={0.3} duration={0.6} />
+        <AtomElectron angle={90} endpoint="far" direction="cw" delay={0.3} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
+        <AtomElectron angle={90} endpoint="near" direction="cw" delay={0.3} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
+        <AtomElectron angle={150} endpoint="far" direction="ccw" delay={0.3} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
+        <AtomElectron angle={150} endpoint="near" direction="ccw" delay={0.3} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
+        <AtomElectron angle={210} endpoint="far" direction="cw" delay={0.3} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
+        <AtomElectron angle={210} endpoint="near" direction="cw" delay={0.3} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
 
-        <circle
-          className="atom-nucleus"
-          cx="200"
-          cy="200"
-          r="14"
-          fill="url(#heroNucleusGrad)"
-          style={{ animationDelay: '0.2s' }}
-        />
+        <g className="atom-nucleus" style={{ animationDelay: '0.2s' }}>
+          <circle
+            cx="200"
+            cy="200"
+            r="26"
+            fill={`url(#${nucleusGlowGradId})`}
+            filter={`url(#${nucleusBlurId})`}
+          />
+          <circle cx="200" cy="200" r="14" fill={`url(#${nucleusGradId})`} />
+          <ellipse cx="195" cy="194" rx="4" ry="2.6" fill="#ffffff" opacity="0.65" />
+        </g>
       </svg>
     </div>
   );

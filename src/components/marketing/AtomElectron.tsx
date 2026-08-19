@@ -11,6 +11,10 @@ interface AtomElectronProps {
   /** Rotational direction; same-orbit far/near pairs must share a direction
    *  to stay antipodal the whole lap and never collide. */
   direction: 'cw' | 'ccw';
+  /** Always render the static rest position, skipping the orbit animation. */
+  forceStatic?: boolean;
+  /** id of the radialGradient (defined by the parent AtomGraphic) to fill with. */
+  fillId: string;
 }
 
 const ORBIT_PATHS = {
@@ -25,24 +29,25 @@ const ORBIT_PATHS = {
 };
 const REST_X = { far: 340, near: 60 };
 
-export default function AtomElectron({ angle, delay, duration, endpoint, direction }: AtomElectronProps) {
+export default function AtomElectron({ angle, delay, duration, endpoint, direction, forceStatic, fillId }: AtomElectronProps) {
   const [isAnimated, setIsAnimated] = useState(false);
 
   useEffect(() => {
+    if (forceStatic) return;
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
     const handleChange = () => setIsAnimated(!query.matches);
     handleChange();
     query.addEventListener('change', handleChange);
     return () => query.removeEventListener('change', handleChange);
-  }, []);
+  }, [forceStatic]);
 
   return (
     <g transform={`rotate(${angle} 200 200)`}>
-      {isAnimated ? (
+      {isAnimated && !forceStatic ? (
         <circle
           className="atom-electron"
           r="6"
-          fill="url(#heroNucleusGrad)"
+          fill={`url(#${fillId})`}
           style={{ animationDelay: `${delay}s` }}
         >
           <animateMotion
@@ -54,7 +59,7 @@ export default function AtomElectron({ angle, delay, duration, endpoint, directi
           />
         </circle>
       ) : (
-        <circle cx={REST_X[endpoint]} cy="200" r="6" fill="url(#heroNucleusGrad)" />
+        <circle cx={REST_X[endpoint]} cy="200" r="6" fill={`url(#${fillId})`} />
       )}
     </g>
   );

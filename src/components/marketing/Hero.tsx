@@ -4,8 +4,18 @@ import AtomGraphic from './AtomGraphic';
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-white dark:bg-vs-bg-deep">
+      <div
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,#dceefb_0%,#ffffff_45%,#ffffff_100%)] dark:hidden"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute -top-[310px] -right-[310px] z-0 lg:hidden"
+        aria-hidden="true"
+      >
+        <AtomGraphic variant="background" />
+      </div>
       <div className="relative max-w-6xl mx-auto px-6 pt-10 pb-14 md:pt-24 md:pb-24 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center">
-        <div className="order-last lg:order-none">
+        <div className="relative z-10 order-last lg:order-none">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-slate-900 dark:text-white">
             Custom software for businesses that outgrew the spreadsheet
           </h1>
@@ -33,7 +43,9 @@ export default function Hero() {
           </div>
         </div>
 
-        <AtomGraphic />
+        <div className="hidden lg:block">
+          <AtomGraphic />
+        </div>
       </div>
     </section>
   );
