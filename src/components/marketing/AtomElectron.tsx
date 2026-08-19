@@ -66,7 +66,7 @@ export default function AtomElectron({ angle, delay, duration, endpoint, directi
         </circle>
       ) : (
         <circle
-          className="atom-electron"
+          className="atom-electron-static"
           cx={REST_X[endpoint]}
           cy="200"
           r="6"

@@ -55,6 +55,13 @@
   animation: hero-fade-node 0.15s ease-out forwards;
 }
 
+.atom-electron-static {
+  opacity: 0;
+  transform: scale(0.7);
+  transform-origin: 200px 200px;
+  animation: atom-nucleus-in 0.4s ease-out forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .atom-orbit {
     animation: none;
@@ -62,7 +69,8 @@
     transform: none;
   }
   .atom-nucleus,
-  .atom-electron {
+  .atom-electron,
+  .atom-electron-static {
     animation: none;
     opacity: 1;
     transform: none;
