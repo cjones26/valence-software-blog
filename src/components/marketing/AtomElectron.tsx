@@ -15,13 +15,6 @@ interface AtomElectronProps {
   fillId: string;
 }
 
-// Relative to the circle's own cx/cy (its rest position) - animateMotion
-// translates an element in ADDITION to its own position, not in place of it,
-// so these paths loop back to (0, 0) rather than to the rest coordinate
-// itself. This also means a circle with no animateMotion at all (or one that
-// never gets to run, e.g. a backgrounded tab during the entrance animation)
-// still renders at the correct rest position instead of the SVG default
-// origin (0, 0), which is off-canvas for this viewBox.
 const ORBIT_PATHS = {
   far: {
     cw: 'M 0 0 A 140 50 0 1 1 -280 0 A 140 50 0 1 1 0 0',

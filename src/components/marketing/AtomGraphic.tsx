@@ -90,11 +90,8 @@ export default function AtomGraphic({ variant = 'card' }: AtomGraphicProps) {
           />
         </g>
 
-        {/* angle=90/far and angle=150/far are the only rest positions that
-            land inside the background variant's visible crop (Hero clips
-            this graphic to -top-[310px] -right-[310px] of its 640px box,
-            leaving only the lower-left slice on screen) - the other four
-            rest or sweep entirely off-canvas there, so skip animating them. */}
+        {/* Only these two rest positions land inside the background
+            variant's clipped crop - the other four sweep or rest off-canvas. */}
         <AtomElectron angle={90} endpoint="far" direction="cw" delay={0.3} duration={0.6} fillId={nucleusGradId} />
         <AtomElectron angle={150} endpoint="far" direction="ccw" delay={0.38} duration={0.6} fillId={nucleusGradId} />
         {!isBackground && (
