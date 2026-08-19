@@ -1,7 +1,7 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
-import { setThemeCookie, type Theme } from '@/lib/theme';
+import React, { createContext, useCallback, useContext, useSyncExternalStore } from 'react';
+import { getThemeFromCookie, setThemeCookie, type Theme } from '@/lib/theme';
 
 interface ThemeContextType {
   theme: Theme;
@@ -18,20 +18,33 @@ export function useTheme() {
   return context;
 }
 
-interface ThemeProviderProps {
-  children: React.ReactNode;
-  initialTheme: Theme;
+const listeners = new Set<() => void>();
+
+function subscribe(callback: () => void) {
+  listeners.add(callback);
+  return () => listeners.delete(callback);
 }
 
-export default function ThemeProvider({ children, initialTheme }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(initialTheme);
+function getServerSnapshot(): Theme {
+  return 'light';
+}
 
-  const toggleTheme = () => {
+interface ThemeProviderProps {
+  children: React.ReactNode;
+}
+
+export default function ThemeProvider({ children }: ThemeProviderProps) {
+  // The page is prerendered as static HTML with no server-known theme. The
+  // inline script in the document head sets the DOM class before paint.
+  // useSyncExternalStore reads that same cookie without a hydration mismatch:
+  // React uses getServerSnapshot for the first client render, then commits
+  // the real value before paint if it differs.
+  const theme = useSyncExternalStore(subscribe, getThemeFromCookie, getServerSnapshot);
+
+  const toggleTheme = useCallback(() => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
     setThemeCookie(newTheme);
 
-    // Update DOM
     if (newTheme === 'dark') {
       document.documentElement.classList.add('dark');
       document.documentElement.style.colorScheme = 'dark';
@@ -39,7 +52,9 @@ export default function ThemeProvider({ children, initialTheme }: ThemeProviderP
       document.documentElement.classList.remove('dark');
       document.documentElement.style.colorScheme = 'light';
     }
-  };
+
+    listeners.forEach((callback) => callback());
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

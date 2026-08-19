@@ -28,20 +28,3 @@ export function setThemeCookie(theme: Theme): void {
 
   document.cookie = `${THEME_COOKIE_NAME}=${theme}; path=/; max-age=${THEME_COOKIE_MAX_AGE}; SameSite=Lax`;
 }
-
-/**
- * Get theme from cookie string (server-side)
- */
-export function getThemeFromCookieString(cookieString: string | undefined): Theme {
-  if (!cookieString) return 'light';
-
-  const cookies = cookieString.split(';');
-  const themeCookie = cookies.find(c => c.trim().startsWith(`${THEME_COOKIE_NAME}=`));
-
-  if (themeCookie) {
-    const theme = themeCookie.split('=')[1].trim();
-    return theme === 'dark' ? 'dark' : 'light';
-  }
-
-  return 'light';
-}

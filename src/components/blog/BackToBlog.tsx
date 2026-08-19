@@ -4,7 +4,7 @@ export default function BackToBlog() {
   return (
     <div className="mb-4">
       <Link
-        href="/"
+        href="/blog"
         className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
       >
         <svg

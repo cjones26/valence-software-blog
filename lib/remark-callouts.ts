@@ -12,53 +12,53 @@ const calloutConfig: Record<string, { emoji: string; label: string }> = {
 
 export default function remarkCallouts() {
   return (tree: Root) => {
-    visit(tree, (node: any) => {
-      if (
-        node.type === 'containerDirective' ||
-        node.type === 'leafDirective' ||
-        node.type === 'textDirective'
-      ) {
-        const calloutType = node.name
-        const config = calloutConfig[calloutType]
+    visit(tree, (node) => {
+      if (node.type !== 'containerDirective' && node.type !== 'leafDirective' && node.type !== 'textDirective') return
 
-        if (config) {
-          const data = node.data || (node.data = {})
+      const calloutType = node.name
+      const config = calloutConfig[calloutType]
 
-          const titleNode = {
-            type: 'paragraph',
-            data: {
-              hName: 'div',
-              hProperties: {
-                className: ['callout-title']
-              }
-            },
-            children: [
-              {
-                type: 'text',
-                value: `${config.emoji} ${config.label}`
-              }
-            ]
-          }
+      if (config) {
+        const data = node.data || (node.data = {})
 
-          const contentNode = {
-            type: 'div',
-            data: {
-              hName: 'div',
-              hProperties: {
-                className: ['callout-content']
-              }
-            },
-            children: node.children
-          }
-
-          data.hName = 'div'
-          data.hProperties = {
-            className: ['callout', `callout-${calloutType}`],
-            'data-callout': calloutType
-          }
-
-          node.children = [titleNode, contentNode]
+        const titleNode = {
+          type: 'paragraph',
+          data: {
+            hName: 'div',
+            hProperties: {
+              className: ['callout-title']
+            }
+          },
+          children: [
+            {
+              type: 'text',
+              value: `${config.emoji} ${config.label}`
+            }
+          ]
         }
+
+        const contentNode = {
+          type: 'div',
+          data: {
+            hName: 'div',
+            hProperties: {
+              className: ['callout-content']
+            }
+          },
+          children: node.children
+        }
+
+        data.hName = 'div'
+        data.hProperties = {
+          className: ['callout', `callout-${calloutType}`],
+          'data-callout': calloutType
+        }
+
+        // titleNode/contentNode render as arbitrary HTML via data.hName, an
+        // mdast-util-to-hast escape hatch with no corresponding mdast node
+        // type ('div' isn't a real mdast type), so they can't structurally
+        // match node.children's real element type.
+        node.children = [titleNode, contentNode] as typeof node.children
       }
     })
   }

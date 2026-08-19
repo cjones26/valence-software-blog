@@ -1,85 +1,85 @@
-# Valence Software Blog
+# Valence Software
 
-Modern Next.js 16 blog with TypeScript, Tailwind CSS v4, and MDX support.
+Marketing site and technical blog for Valence Software, a one-person custom
+software consultancy based in Virginia Beach, VA.
 
-## Features
+- `/` — marketing homepage: what the business does, how it works, how to get
+  in touch
+- `/about` — background on the owner, Charles Jones
+- `/blog` — the technical blog (Next.js/JS/Linux/systems posts going back to
+  2009), kept as a section rather than the front door
+- Individual posts stay at their original `/[year]/[month]/[day]/[slug]`
+  URLs regardless of how the blog index is organized, since some carry
+  long-standing inbound links
 
-- **Next.js 16** with App Router and React Server Components
-- **TypeScript** with strict mode
-- **Tailwind CSS v4** with typography plugin
-- **Turbopack** for fast builds and HMR
-- **Contentlayer** for type-safe MDX content
-- **Dark/Light Mode** with next-themes
-- **Search** with Fuse.js (client-side fuzzy search)
-- **Tags System** with clickable tags and filtering
-- **Giscus Comments** (GitHub Discussions-based)
-- **Syntax Highlighting** with rehype-pretty-code and Shiki
-- **Responsive Design** with mobile-first approach
+## Stack
 
-## Getting Started
+- **Next.js 16** (App Router) + React 19 + TypeScript
+- **Tailwind CSS v4** via `@tailwindcss/postcss`
+- **Contentlayer2** for type-safe MDX content (`content/posts/YYYY/<slug>/index.mdx`)
+- **next-themes**-style class-based dark/light mode (see below)
+- **Fuse.js** client-side search (blog routes only)
+- **Giscus** comments (GitHub Discussions-based)
+- **rehype-pretty-code** + **Shiki** for syntax highlighting
+- **plaiceholder** for blur placeholders on post images
 
-### Development
+Every route is statically prerendered (`next build` shows `○`/`●` for all
+routes, no `ƒ`) — there's no database and no per-request server rendering,
+so this deploys cleanly to any static-friendly host.
+
+## Getting started
 
 ```bash
-npm run dev
+npm install
+npm run dev     # http://localhost:3000
 ```
 
-Opens on [http://localhost:3000](http://localhost:3000)
-
-### Build
-
 ```bash
-npm run build
-```
-
-### Production
-
-```bash
+npm run build   # contentlayer2 build && next build
 npm start
 ```
 
 ## Configuration
 
-### Giscus Comments
+### Giscus comments
 
-Update `/src/components/Comments.tsx` with your repository details:
+Update `src/components/ui/Comments.tsx` with your repository details:
 
 1. Go to [giscus.app](https://giscus.app/) and configure your repository
-2. Enable GitHub Discussions on your repository
+2. Enable GitHub Discussions on the repository
 3. Install the [Giscus app](https://github.com/apps/giscus)
-4. Update the component with your `repo`, `repoId`, `category`, and `categoryId`
+4. Set `repo`, `repoId`, `category`, and `categoryId` on the component
 
-Current placeholder values:
-- `repo`: "cjones26/valence-software-blog-comments"
-- `repoId`: "YOUR_REPO_ID" ← Update this
-- `categoryId`: "YOUR_CATEGORY_ID" ← Update this
+### Site metadata
 
-### Site Metadata
+Root metadata (title, description, Open Graph, structured data) lives in
+`src/app/layout.tsx` and `src/app/page.tsx`. `metadataBase` points at
+`https://valencesoftware.io`.
 
-Update `/src/app/layout.tsx` to customize:
-- Site title and description
-- Open Graph metadata
-- Twitter card settings
-- Domain (metadataBase URL)
+### Contact information
 
-### Contact Information
+The email, phone number, and service area shown in the homepage contact
+section and the `Footer` component are the source of truth — update both if
+they change.
 
-Update `/src/components/Layout.tsx` footer section with your:
-- Email address
-- GitHub profile
-- LinkedIn profile
+## Deployment
 
-## Content Management
+Deploys to [Netlify](https://app.netlify.com/projects/valence-software-blog)
+(`valencesoftware.io`). Every route is statically prerendered, so this is a
+plain static-site deploy with no functions/SSR involved — `npm run build`
+produces the full output, no adapter needed. Any static-friendly host works
+the same way (Netlify, Cloudflare Pages, etc.); Vercel would also work but
+isn't required for anything here.
 
-### Adding Blog Posts
+## Adding blog posts
 
-1. Create a new folder in `content/posts/YYYY/your-post-slug/`
-2. Add an `index.mdx` file with frontmatter:
+1. Create `content/posts/YYYY/your-post-slug/index.mdx`
+2. Add frontmatter:
 
 ```mdx
 ---
 title: Your Post Title
-date: 2025-10-31
+date: 2026-01-01
 published: true
 tags:
   - 'Tag 1'
@@ -90,93 +90,37 @@ description: Optional short description
 Your content here...
 ```
 
-3. Add images/assets in the same folder
-4. Reference images with relative paths: `![Alt text](./image.png)`
+3. Add any images/assets in the same folder and reference them with relative
+   paths: `![Alt text](./image.png)`
 
-### Available Tags
+Posts are served from `/[year]/[month]/[day]/[slug]` (derived from the
+`date` frontmatter and folder slug) — this URL shape is load-bearing and
+should not change. The `/blog` index and `/blog/page/[n]` pagination read
+from the same content; `/page/:n` permanently redirects to `/blog/page/:n`
+for old links.
 
-Tags are automatically standardized. Common tags:
-- Programming: JavaScript, TypeScript, C#, C++, Python
-- Web: React, Next.js, Angular, Web Development
-- Systems: Linux, Windows, macOS, System Administration
-- Microsoft: Exchange, PowerShell, Active Directory, Office
-- Development Tools: npm, Git, Docker, Gradle
-
-## Project Structure
+## Project structure
 
 ```
-valence-software-blog/
-├── src/
-│   ├── app/                    # Next.js App Router pages
-│   │   ├── [year]/[month]/[day]/[slug]/  # Blog post pages
-│   │   ├── tags/              # Tag listing and filtering
-│   │   ├── search/            # Search page
-│   │   ├── about/             # About page
-│   │   ├── layout.tsx         # Root layout
-│   │   └── page.tsx           # Homepage
-│   ├── components/            # React components
-│   │   ├── Layout.tsx         # Main layout wrapper
-│   │   ├── PostCard.tsx       # Blog post preview card
-│   │   ├── SearchBar.tsx      # Search component
-│   │   ├── Comments.tsx       # Giscus comments
-│   │   ├── ThemeProvider.tsx  # Theme context
-│   │   └── LightDarkToggle.tsx  # Theme switcher
-│   └── app/globals.css        # Global styles
-├── content/
-│   └── posts/                 # Blog posts (by year)
-├── public/                    # Static assets
-├── contentlayer.config.ts     # Contentlayer configuration
-├── next.config.ts             # Next.js configuration
-└── tsconfig.json              # TypeScript configuration
+src/
+├── app/
+│   ├── page.tsx                       # marketing homepage (/)
+│   ├── about/page.tsx                 # about page
+│   ├── blog/
+│   │   ├── page.tsx                   # blog index
+│   │   └── page/[pageNum]/page.tsx    # blog pagination
+│   ├── [year]/[month]/[day]/[slug]/   # individual posts (unmoved)
+│   ├── tags/, tags/[tag]/             # tag pages (unmoved)
+│   └── layout.tsx                     # root layout
+├── components/
+│   ├── layout/                        # Header, Footer, PageLayout, BlogLayout
+│   ├── blog/                          # post cards, list, tags, back-to-blog
+│   ├── mdx/                           # MDX rendering components
+│   ├── search/                        # blog-only search UI
+│   └── ui/                            # theme toggle, comments, theme provider
+content/posts/YYYY/<slug>/index.mdx    # blog content
+public/fonts/                          # Fixel Text + Source Serif 4 (self-hosted)
 ```
-
-## Styling
-
-### Dark Mode
-
-The site uses `next-themes` with class-based dark mode. The theme toggle automatically:
-- Persists user preference
-- Respects system preference on first visit
-- Updates Giscus comments theme
-- Provides smooth transitions
-
-### Typography
-
-Blog posts use Tailwind's prose classes with custom dark mode styling. Code blocks use Shiki with GitHub-themed syntax highlighting.
-
-## Deployment
-
-### Vercel (Recommended)
-
-1. Push to GitHub
-2. Import project in Vercel
-3. Configure environment variables (if needed)
-4. Deploy
-
-### Other Platforms
-
-The build output is standard Next.js, compatible with:
-- Netlify
-- AWS Amplify
-- Docker
-- Node.js servers
-
-## Migration Notes
-
-This site was migrated from Gatsby with:
-- ✅ All 38 blog posts migrated
-- ✅ Tags cleaned up and standardized
-- ✅ Dark/light mode preserved
-- ✅ Improved tag system (clickable, filterable)
-- ✅ New search functionality
-- ✅ Better comments system (Giscus vs Utterances)
-- ✅ Modern tech stack (Next.js 16, Turbopack, Tailwind v4)
-
-## Next Steps
-
-- Configure Giscus with your repository-specific values (see Configuration section above)
-- Update contact information in the footer
-- Customize site metadata and branding
 
 ## License
 
