@@ -60,7 +60,7 @@ export default function Services() {
             <Reveal
               key={title}
               delayMs={index * 60}
-              className="flex flex-row items-start gap-3 text-left sm:flex-col sm:items-center sm:gap-0 sm:text-center rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 shadow-sm p-6"
+              className="flex flex-row items-start gap-3 text-left sm:flex-col sm:items-center sm:gap-0 sm:text-center"
             >
               <Icon
                 className="w-6 h-6 shrink-0 mt-1 sm:mt-0 text-vs-blue dark:text-vs-cyan"

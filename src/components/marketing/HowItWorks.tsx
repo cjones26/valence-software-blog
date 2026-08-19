@@ -50,7 +50,7 @@ export default function HowItWorks() {
             <Reveal
               key={title}
               delayMs={index * 60}
-              className="flex flex-row items-start gap-3 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 shadow-sm p-6"
+              className="flex flex-row items-start gap-3"
             >
               <Icon
                 className="w-6 h-6 shrink-0 mt-1 text-vs-blue dark:text-vs-cyan"
