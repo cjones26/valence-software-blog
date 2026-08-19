@@ -55,7 +55,9 @@ export default function AtomElectron({ angle, delay, duration, endpoint, directi
             begin={`${delay}s`}
             dur={`${duration}s`}
             fill="freeze"
-            calcMode="linear"
+            calcMode="spline"
+            keyTimes="0;1"
+            keySplines="0.4 0 0.2 1"
           />
         </circle>
       ) : (

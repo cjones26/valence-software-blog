@@ -16,9 +16,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@keyframes hero-draw-line {
+@keyframes hero-orbit-in {
   to {
-    stroke-dashoffset: 0;
+    opacity: 0.6;
+    transform: scale(1);
   }
 }
 
@@ -36,9 +37,10 @@
 }
 
 .atom-orbit {
-  stroke-dasharray: 631;
-  stroke-dashoffset: 631;
-  animation: hero-draw-line 0.35s ease-out forwards;
+  opacity: 0;
+  transform: scale(0.7);
+  transform-origin: 200px 200px;
+  animation: hero-orbit-in 0.4s ease-out forwards;
 }
 
 .atom-nucleus {
@@ -54,11 +56,14 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .atom-orbit,
+  .atom-orbit {
+    animation: none;
+    opacity: 0.6;
+    transform: none;
+  }
   .atom-nucleus,
   .atom-electron {
     animation: none;
-    stroke-dashoffset: 0;
     opacity: 1;
     transform: none;
   }

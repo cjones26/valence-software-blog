@@ -50,52 +50,52 @@ export default function AtomGraphic({ variant = 'card' }: AtomGraphicProps) {
           </filter>
         </defs>
 
-        <ellipse
-          className="atom-orbit"
-          cx="200"
-          cy="200"
-          rx="140"
-          ry="50"
-          stroke={`url(#${lineGradId})`}
-          strokeWidth="1.5"
-          fill="none"
-          opacity="0.6"
-          transform="rotate(90 200 200)"
-          style={{ animationDelay: '0s' }}
-        />
-        <ellipse
-          className="atom-orbit"
-          cx="200"
-          cy="200"
-          rx="140"
-          ry="50"
-          stroke={`url(#${lineGradId})`}
-          strokeWidth="1.5"
-          fill="none"
-          opacity="0.6"
-          transform="rotate(150 200 200)"
-          style={{ animationDelay: '0.08s' }}
-        />
-        <ellipse
-          className="atom-orbit"
-          cx="200"
-          cy="200"
-          rx="140"
-          ry="50"
-          stroke={`url(#${lineGradId})`}
-          strokeWidth="1.5"
-          fill="none"
-          opacity="0.6"
-          transform="rotate(210 200 200)"
-          style={{ animationDelay: '0.16s' }}
-        />
+        <g transform="rotate(90 200 200)">
+          <ellipse
+            className="atom-orbit"
+            cx="200"
+            cy="200"
+            rx="140"
+            ry="50"
+            stroke={`url(#${lineGradId})`}
+            strokeWidth="1.5"
+            fill="none"
+            style={{ animationDelay: '0s' }}
+          />
+        </g>
+        <g transform="rotate(150 200 200)">
+          <ellipse
+            className="atom-orbit"
+            cx="200"
+            cy="200"
+            rx="140"
+            ry="50"
+            stroke={`url(#${lineGradId})`}
+            strokeWidth="1.5"
+            fill="none"
+            style={{ animationDelay: '0.08s' }}
+          />
+        </g>
+        <g transform="rotate(210 200 200)">
+          <ellipse
+            className="atom-orbit"
+            cx="200"
+            cy="200"
+            rx="140"
+            ry="50"
+            stroke={`url(#${lineGradId})`}
+            strokeWidth="1.5"
+            fill="none"
+            style={{ animationDelay: '0.16s' }}
+          />
+        </g>
 
         <AtomElectron angle={90} endpoint="far" direction="cw" delay={0.3} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
         <AtomElectron angle={90} endpoint="near" direction="cw" delay={0.3} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
-        <AtomElectron angle={150} endpoint="far" direction="ccw" delay={0.3} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
-        <AtomElectron angle={150} endpoint="near" direction="ccw" delay={0.3} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
-        <AtomElectron angle={210} endpoint="far" direction="cw" delay={0.3} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
-        <AtomElectron angle={210} endpoint="near" direction="cw" delay={0.3} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
+        <AtomElectron angle={150} endpoint="far" direction="ccw" delay={0.38} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
+        <AtomElectron angle={150} endpoint="near" direction="ccw" delay={0.38} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
+        <AtomElectron angle={210} endpoint="far" direction="cw" delay={0.46} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
+        <AtomElectron angle={210} endpoint="near" direction="cw" delay={0.46} duration={0.6} forceStatic={isBackground} fillId={nucleusGradId} />
 
         <g className="atom-nucleus" style={{ animationDelay: '0.2s' }}>
           <circle
