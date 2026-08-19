@@ -11,45 +11,51 @@ interface AtomElectronProps {
   /** Rotational direction; same-orbit far/near pairs must share a direction
    *  to stay antipodal the whole lap and never collide. */
   direction: 'cw' | 'ccw';
-  /** Always render the static rest position, skipping the orbit animation. */
-  forceStatic?: boolean;
   /** id of the radialGradient (defined by the parent AtomGraphic) to fill with. */
   fillId: string;
 }
 
+// Relative to the circle's own cx/cy (its rest position) - animateMotion
+// translates an element in ADDITION to its own position, not in place of it,
+// so these paths loop back to (0, 0) rather than to the rest coordinate
+// itself. This also means a circle with no animateMotion at all (or one that
+// never gets to run, e.g. a backgrounded tab during the entrance animation)
+// still renders at the correct rest position instead of the SVG default
+// origin (0, 0), which is off-canvas for this viewBox.
 const ORBIT_PATHS = {
   far: {
-    cw: 'M 340 200 A 140 50 0 1 1 60 200 A 140 50 0 1 1 340 200',
-    ccw: 'M 340 200 A 140 50 0 1 0 60 200 A 140 50 0 1 0 340 200',
+    cw: 'M 0 0 A 140 50 0 1 1 -280 0 A 140 50 0 1 1 0 0',
+    ccw: 'M 0 0 A 140 50 0 1 0 -280 0 A 140 50 0 1 0 0 0',
   },
   near: {
-    cw: 'M 60 200 A 140 50 0 1 1 340 200 A 140 50 0 1 1 60 200',
-    ccw: 'M 60 200 A 140 50 0 1 0 340 200 A 140 50 0 1 0 60 200',
+    cw: 'M 0 0 A 140 50 0 1 1 280 0 A 140 50 0 1 1 0 0',
+    ccw: 'M 0 0 A 140 50 0 1 0 280 0 A 140 50 0 1 0 0 0',
   },
 };
 const REST_X = { far: 340, near: 60 };
 
-export default function AtomElectron({ angle, delay, duration, endpoint, direction, forceStatic, fillId }: AtomElectronProps) {
+export default function AtomElectron({ angle, delay, duration, endpoint, direction, fillId }: AtomElectronProps) {
   const [isAnimated, setIsAnimated] = useState(false);
 
   useEffect(() => {
-    if (forceStatic) return;
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
     const handleChange = () => setIsAnimated(!query.matches);
     handleChange();
     query.addEventListener('change', handleChange);
     return () => query.removeEventListener('change', handleChange);
-  }, [forceStatic]);
+  }, []);
 
   return (
     <g transform={`rotate(${angle} 200 200)`}>
-      {isAnimated && !forceStatic ? (
-        <circle
-          className="atom-electron"
-          r="6"
-          fill={`url(#${fillId})`}
-          style={{ animationDelay: `${delay}s` }}
-        >
+      <circle
+        className="atom-electron"
+        cx={REST_X[endpoint]}
+        cy="200"
+        r="6"
+        fill={`url(#${fillId})`}
+        style={{ animationDelay: `${delay}s` }}
+      >
+        {isAnimated && (
           <animateMotion
             path={ORBIT_PATHS[endpoint][direction]}
             begin={`${delay}s`}
@@ -59,10 +65,8 @@ export default function AtomElectron({ angle, delay, duration, endpoint, directi
             keyTimes="0;1"
             keySplines="0.4 0 0.2 1"
           />
-        </circle>
-      ) : (
-        <circle cx={REST_X[endpoint]} cy="200" r="6" fill={`url(#${fillId})`} />
-      )}
+        )}
+      </circle>
     </g>
   );
 }

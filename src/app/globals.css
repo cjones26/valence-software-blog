@@ -23,12 +23,6 @@
   }
 }
 
-@keyframes hero-fade-node {
-  to {
-    opacity: 1;
-  }
-}
-
 @keyframes atom-nucleus-in {
   to {
     opacity: 1;
@@ -51,8 +45,11 @@
 }
 
 .atom-electron {
+  transform-box: fill-box;
+  transform-origin: center;
   opacity: 0;
-  animation: hero-fade-node 0.15s ease-out forwards;
+  transform: scale(0.3);
+  animation: atom-nucleus-in 0.25s ease-out forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
