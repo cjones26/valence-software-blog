@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import AtomGraphic from './AtomGraphic';
+import { scrollToAnchorOnClick } from '@/lib/scrollToAnchor';
 
 export default function Hero() {
   return (
@@ -21,24 +24,26 @@ export default function Hero() {
           </h1>
           <p className="mt-6 text-[17px] md:text-xl leading-relaxed text-slate-700 dark:text-vs-muted max-w-xl">
             I build the custom software, integrations, and automations that
-            off-the-shelf tools usually cannot handle, based on about
-            fifteen years of engineering work, most of it in banking and
-            financial services out of Charlotte, North Carolina, including
-            time in information security. You deal with me directly on
-            every project, not an account manager.
+            off-the-shelf tools usually cannot handle, based on about fifteen
+            years of engineering work, most of it in banking and financial
+            services out of Charlotte, North Carolina, including time in
+            information security. You deal with me directly on every project,
+            not an account manager.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <Link
               href="#contact"
+              onClick={scrollToAnchorOnClick('contact')}
               className="inline-flex items-center justify-center rounded-lg px-6 py-3 text-[17px] font-semibold text-white bg-vs-bg-deep dark:text-vs-bg-deep dark:bg-vs-cyan shadow-md hover:shadow-lg transition-shadow"
             >
               Get in touch
             </Link>
             <Link
               href="#services"
+              onClick={scrollToAnchorOnClick('services')}
               className="inline-flex items-center justify-center rounded-lg px-6 py-3 text-[17px] font-semibold text-slate-900 dark:text-white border border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors"
             >
-              What I do
+              Services
             </Link>
           </div>
         </div>
