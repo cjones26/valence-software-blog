@@ -91,15 +91,15 @@ export default function AtomGraphic({ variant = 'card' }: AtomGraphicProps) {
         </g>
 
         {/* Only these two rest positions land inside the background
-            variant's clipped crop - the other four sweep or rest off-canvas. */}
-        <AtomElectron angle={90} endpoint="far" direction="cw" delay={0.3} duration={0.6} fillId={nucleusGradId} />
-        <AtomElectron angle={150} endpoint="far" direction="ccw" delay={0.38} duration={0.6} fillId={nucleusGradId} />
+            variant's clipped crop - the other four rest off-canvas there. */}
+        <AtomElectron angle={90} endpoint="far" direction="cw" delay={isBackground ? 0 : 0.3} duration={0.6} sweep={!isBackground} fillId={nucleusGradId} />
+        <AtomElectron angle={150} endpoint="far" direction="ccw" delay={isBackground ? 0.08 : 0.38} duration={0.6} sweep={!isBackground} fillId={nucleusGradId} />
         {!isBackground && (
           <>
-            <AtomElectron angle={90} endpoint="near" direction="cw" delay={0.3} duration={0.6} fillId={nucleusGradId} />
-            <AtomElectron angle={150} endpoint="near" direction="ccw" delay={0.38} duration={0.6} fillId={nucleusGradId} />
-            <AtomElectron angle={210} endpoint="far" direction="cw" delay={0.46} duration={0.6} fillId={nucleusGradId} />
-            <AtomElectron angle={210} endpoint="near" direction="cw" delay={0.46} duration={0.6} fillId={nucleusGradId} />
+            <AtomElectron angle={90} endpoint="near" direction="cw" delay={0.3} duration={0.6} sweep fillId={nucleusGradId} />
+            <AtomElectron angle={150} endpoint="near" direction="ccw" delay={0.38} duration={0.6} sweep fillId={nucleusGradId} />
+            <AtomElectron angle={210} endpoint="far" direction="cw" delay={0.46} duration={0.6} sweep fillId={nucleusGradId} />
+            <AtomElectron angle={210} endpoint="near" direction="cw" delay={0.46} duration={0.6} sweep fillId={nucleusGradId} />
           </>
         )}
 

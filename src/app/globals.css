@@ -30,6 +30,12 @@
   }
 }
 
+@keyframes hero-fade-node {
+  to {
+    opacity: 1;
+  }
+}
+
 .atom-orbit {
   opacity: 0;
   transform: scale(0.7);
@@ -45,11 +51,15 @@
 }
 
 .atom-electron {
-  transform-box: fill-box;
-  transform-origin: center;
   opacity: 0;
-  transform: scale(0.3);
-  animation: atom-nucleus-in 0.25s ease-out forwards;
+  animation: hero-fade-node 0.15s ease-out forwards;
+}
+
+.atom-electron-static {
+  opacity: 0;
+  transform: scale(0.7);
+  transform-origin: 200px 200px;
+  animation: atom-nucleus-in 0.4s ease-out forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -59,7 +69,8 @@
     transform: none;
   }
   .atom-nucleus,
-  .atom-electron {
+  .atom-electron,
+  .atom-electron-static {
     animation: none;
     opacity: 1;
     transform: none;

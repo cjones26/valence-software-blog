@@ -11,6 +11,8 @@ interface AtomElectronProps {
   /** Rotational direction; same-orbit far/near pairs must share a direction
    *  to stay antipodal the whole lap and never collide. */
   direction: 'cw' | 'ccw';
+  /** Sweep along the orbit path on entrance; false just fades/scales in at rest. */
+  sweep: boolean;
   /** id of the radialGradient (defined by the parent AtomGraphic) to fill with. */
   fillId: string;
 }
@@ -27,12 +29,15 @@ const ORBIT_PATHS = {
 };
 const REST_X = { far: 340, near: 60 };
 
-export default function AtomElectron({ angle, delay, duration, endpoint, direction, fillId }: AtomElectronProps) {
-  const [isAnimated, setIsAnimated] = useState(false);
+export default function AtomElectron({ angle, delay, duration, endpoint, direction, sweep, fillId }: AtomElectronProps) {
+  // Defaults to false so animateMotion renders from the first paint instead
+  // of being added a tick after mount; only removed post-mount for the rare
+  // reduced-motion visitor.
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handleChange = () => setIsAnimated(!query.matches);
+    const handleChange = () => setReducedMotion(query.matches);
     handleChange();
     query.addEventListener('change', handleChange);
     return () => query.removeEventListener('change', handleChange);
@@ -40,26 +45,36 @@ export default function AtomElectron({ angle, delay, duration, endpoint, directi
 
   return (
     <g transform={`rotate(${angle} 200 200)`}>
-      <circle
-        className="atom-electron"
-        cx={REST_X[endpoint]}
-        cy="200"
-        r="6"
-        fill={`url(#${fillId})`}
-        style={{ animationDelay: `${delay}s` }}
-      >
-        {isAnimated && (
+      {sweep && !reducedMotion ? (
+        <circle
+          className="atom-electron"
+          cx={REST_X[endpoint]}
+          cy="200"
+          r="6"
+          fill={`url(#${fillId})`}
+          style={{ animationDelay: `${delay}s` }}
+        >
           <animateMotion
             path={ORBIT_PATHS[endpoint][direction]}
             begin={`${delay}s`}
             dur={`${duration}s`}
             fill="freeze"
             calcMode="spline"
+            keyPoints="0;1"
             keyTimes="0;1"
             keySplines="0.4 0 0.2 1"
           />
-        )}
-      </circle>
+        </circle>
+      ) : (
+        <circle
+          className="atom-electron-static"
+          cx={REST_X[endpoint]}
+          cy="200"
+          r="6"
+          fill={`url(#${fillId})`}
+          style={{ animationDelay: `${delay}s` }}
+        />
+      )}
     </g>
   );
 }
