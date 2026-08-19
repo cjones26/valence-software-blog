@@ -5,7 +5,7 @@ import Reveal from './Reveal';
 const principles: Array<{ title: string; body: string; icon: IconType }> = [
   {
     title: 'A fixed price.',
-    body: 'You get a number before work starts, based on a scope agreed on up front, rather than an open meter that keeps running the longer things take.',
+    body: 'You get a number before work starts, based on a scope agreed upon up front, rather than an open meter that keeps running the longer things take.',
     icon: FiTag,
   },
   {
@@ -20,7 +20,7 @@ const principles: Array<{ title: string; body: string; icon: IconType }> = [
   },
   {
     title: 'Support after launch.',
-    body: 'Every project includes a warranty period, with ongoing support after that if you want it.',
+    body: 'Every project includes a warranty period, with ongoing support available after that.',
     icon: FiLifeBuoy,
   },
 ];
