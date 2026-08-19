@@ -1,7 +1,7 @@
 export type Theme = 'light' | 'dark';
 
-export const THEME_COOKIE_NAME = 'theme';
-export const THEME_COOKIE_MAX_AGE = 31536000; // 1 year in seconds
+const THEME_COOKIE_NAME = 'theme';
+const THEME_COOKIE_MAX_AGE = 31536000; // 1 year in seconds
 
 /**
  * Get theme from cookie (client-side)
