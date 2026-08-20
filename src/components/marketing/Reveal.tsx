@@ -1,60 +1,47 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import styles from './Reveal.module.css';
 
 interface RevealProps {
   children: React.ReactNode;
   className?: string;
-  delayMs?: number;
 }
 
-export default function Reveal({ children, className, delayMs = 0 }: RevealProps) {
+export default function Reveal({ children, className }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
+  const classes = className ? `${styles.reveal} ${className}` : styles.reveal;
 
   useEffect(() => {
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handleMotionChange = () => setReduceMotion(motionQuery.matches);
-    handleMotionChange();
-    motionQuery.addEventListener('change', handleMotionChange);
-
-    const node = ref.current;
-    if (!node) {
-      motionQuery.removeEventListener('change', handleMotionChange);
+    const element = ref.current;
+    if (
+      !element ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      element.getBoundingClientRect().top < window.innerHeight
+    ) {
       return;
     }
 
+    element.classList.add(styles.pending);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
+        if (!entry.isIntersecting) {
+          return;
         }
+
+        element.classList.remove(styles.pending);
+        observer.disconnect();
       },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      { rootMargin: '0px 0px -10%' }
     );
 
-    observer.observe(node);
+    observer.observe(element);
+
     return () => {
       observer.disconnect();
-      motionQuery.removeEventListener('change', handleMotionChange);
     };
   }, []);
 
-  const isHidden = !isVisible && !reduceMotion;
-
-  return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: isHidden ? 0 : 1,
-        transform: isHidden ? 'translateY(12px)' : 'translateY(0)',
-        transition: reduceMotion ? 'none' : `opacity 700ms ease-out ${delayMs}ms, transform 700ms ease-out ${delayMs}ms`,
-      }}
-    >
-      {children}
-    </div>
-  );
+  return <div ref={ref} className={classes}>{children}</div>;
 }

@@ -63,21 +63,20 @@ export default function AboutPage() {
           </Reveal>
 
           <div className="space-y-8 text-[17px] md:text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-            <Reveal delayMs={60}>
+            <Reveal>
               <p>
-                I moved to Virginia Beach in 2022, after years mostly in
-                Charlotte, North Carolina, one of the biggest banking
-                centers in the country. Information security was part of
-                that background as well.
+                Originally from Charlotte, North Carolina, where I spent
+                most of my career in banking and financial services,
+                including time in information security, I moved to
+                Virginia Beach in 2022.
               </p>
               <p className="mt-4">
-                I started Valence Software to spend my time solving a
-                specific business&apos;s actual problem, instead of
-                working through someone else&apos;s product roadmap.
+                I started Valence Software to work on real problems for
+                real businesses, not someone else&apos;s product roadmap.
               </p>
             </Reveal>
 
-            <Reveal delayMs={120}>
+            <Reveal>
               <p>
                 I also keep{' '}
                 <Link href="/blog" className="text-blue-800 dark:text-vs-cyan hover:underline">a technical blog</Link>{' '}
@@ -86,7 +85,7 @@ export default function AboutPage() {
               </p>
             </Reveal>
 
-            <Reveal delayMs={220}>
+            <Reveal>
               <div className="pt-6 border-t border-slate-200 dark:border-white/10">
                 <Link
                   href="/#contact"
