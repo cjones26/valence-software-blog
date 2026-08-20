@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import styles from './AtomGraphic.module.css';
 
 interface AtomElectronProps {
   angle: number;
@@ -47,7 +48,7 @@ export default function AtomElectron({ angle, delay, duration, endpoint, directi
     <g transform={`rotate(${angle} 200 200)`}>
       {sweep && !reducedMotion ? (
         <circle
-          className="atom-electron"
+          className={styles.electron}
           cx={REST_X[endpoint]}
           cy="200"
           r="6"
@@ -67,7 +68,7 @@ export default function AtomElectron({ angle, delay, duration, endpoint, directi
         </circle>
       ) : (
         <circle
-          className="atom-electron-static"
+          className={styles.staticElectron}
           cx={REST_X[endpoint]}
           cy="200"
           r="6"

@@ -1,5 +1,6 @@
 import { useId } from 'react';
 import AtomElectron from './AtomElectron';
+import styles from './AtomGraphic.module.css';
 
 interface AtomGraphicProps {
   /** 'card' (default): the animated foreground card, as used on desktop.
@@ -52,7 +53,7 @@ export default function AtomGraphic({ variant = 'card' }: AtomGraphicProps) {
 
         <g transform="rotate(90 200 200)">
           <ellipse
-            className="atom-orbit"
+            className={styles.orbit}
             cx="200"
             cy="200"
             rx="140"
@@ -65,7 +66,7 @@ export default function AtomGraphic({ variant = 'card' }: AtomGraphicProps) {
         </g>
         <g transform="rotate(150 200 200)">
           <ellipse
-            className="atom-orbit"
+            className={styles.orbit}
             cx="200"
             cy="200"
             rx="140"
@@ -78,7 +79,7 @@ export default function AtomGraphic({ variant = 'card' }: AtomGraphicProps) {
         </g>
         <g transform="rotate(210 200 200)">
           <ellipse
-            className="atom-orbit"
+            className={styles.orbit}
             cx="200"
             cy="200"
             rx="140"
@@ -103,7 +104,7 @@ export default function AtomGraphic({ variant = 'card' }: AtomGraphicProps) {
           </>
         )}
 
-        <g className="atom-nucleus" style={{ animationDelay: '0.2s' }}>
+        <g className={styles.nucleus} style={{ animationDelay: '0.2s' }}>
           <circle
             cx="200"
             cy="200"
