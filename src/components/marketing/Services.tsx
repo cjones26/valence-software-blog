@@ -1,37 +1,27 @@
-import { FiRefreshCw, FiTool, FiLink2, FiSettings, FiShield, FiBarChart2 } from 'react-icons/fi';
+import { FiCompass, FiRefreshCw, FiTool, FiLink2 } from 'react-icons/fi';
 import type { IconType } from 'react-icons';
 import Reveal from './Reveal';
 
 const services: Array<{ title: string; body: string; icon: IconType }> = [
   {
-    title: 'Replace manual processes',
-    body: 'I build the automation that gets rid of the two-day monthly report and the data that gets typed into two systems by hand.',
+    title: 'Technology guidance',
+    body: 'Evaluate systems, vendors, upgrades, and technical direction before committing time and money.',
+    icon: FiCompass,
+  },
+  {
+    title: 'Systems and workflow improvement',
+    body: 'Find where work slows down, information gets lost, or existing tools create more effort than they remove.',
     icon: FiRefreshCw,
   },
   {
-    title: 'Build the software you need',
-    body: "I replace the spreadsheet nobody really trusts with a real application - permissions, history, and all - whether that's a tool for your team or something your own customers use directly.",
-    icon: FiTool,
-  },
-  {
-    title: 'Connect systems that do not talk',
-    body: 'I build the integration that gets two systems talking, so nobody on your team retypes the same information twice.',
+    title: 'Integration and automation',
+    body: 'Connect existing systems and reduce repetitive reporting, document handling, data entry, and other manual work.',
     icon: FiLink2,
   },
   {
-    title: 'Pick up where the vendor stops',
-    body: "When a vendor won't build it, or their platform simply can't, I build the piece they leave out.",
-    icon: FiSettings,
-  },
-  {
-    title: 'See what is actually happening',
-    body: "I build the dashboard that pulls your real numbers into one place, so you stop digging through spreadsheets to find out what's going on.",
-    icon: FiBarChart2,
-  },
-  {
-    title: 'Work that holds up under scrutiny',
-    body: 'Years building audited, security-conscious software for banks taught me to make things hold up under real scrutiny - from inspectors to a prime contractor.',
-    icon: FiShield,
+    title: 'Custom software',
+    body: 'Design and build purpose-built software when existing products cannot responsibly meet the need.',
+    icon: FiTool,
   },
 ];
 
@@ -46,29 +36,29 @@ export default function Services() {
         <Reveal>
           <h2
             id="services-heading"
-            className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white"
           >
-            Services
+            How I can help
           </h2>
         </Reveal>
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">
-          {services.map(({ title, body, icon: Icon }, index) => (
+
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-x-12">
+          {services.map(({ title, body, icon: Icon }) => (
             <Reveal
               key={title}
-              delayMs={index * 60}
-              className="flex flex-row items-start gap-3 text-left sm:flex-col sm:items-center sm:gap-0 sm:text-center"
+              className="flex items-start gap-4 border-t border-slate-300 py-7 dark:border-white/15"
             >
-              <div className="shrink-0 flex items-center justify-center w-11 h-11 rounded-full bg-vs-blue/10 dark:bg-vs-cyan/10">
+              <div className="shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-vs-blue/10 dark:bg-vs-cyan/10">
                 <Icon
                   className="w-5 h-5 text-vs-blue dark:text-vs-cyan"
                   aria-hidden="true"
                 />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white sm:mt-3">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white">
                   {title}
                 </h3>
-                <p className="mt-1 text-[17px] leading-relaxed text-slate-700 dark:text-vs-muted">
+                <p className="mt-2 text-[17px] leading-relaxed text-slate-700 dark:text-vs-muted">
                   {body}
                 </p>
               </div>

@@ -5,9 +5,9 @@ import GoogleAnalytics, { GoogleTagManagerNoScript } from '@/components/analytic
 import './fonts.css';
 import './globals.css';
 
-const SITE_TITLE = 'Valence Software | Custom Software and Technology Consulting';
+const SITE_TITLE = 'Valence Software | Technology Consulting and Custom Software';
 const SITE_DESCRIPTION =
-  'Custom software, integrations, and automation for businesses that have outgrown spreadsheets and off-the-shelf tools. Serving Hampton Roads, Virginia.';
+  'Practical technology consulting, systems integration, workflow improvement, and custom software for small and mid-sized businesses. Based in Virginia Beach, Virginia.';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -23,11 +23,12 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   keywords: [
-    'custom software development',
-    'software consultant',
-    'business automation',
+    'technology consultant',
+    'small business technology consulting',
     'system integration',
-    'internal tools',
+    'workflow improvement',
+    'business automation',
+    'custom software development',
     'Virginia Beach software developer',
     'Hampton Roads software consultant',
   ],
@@ -106,7 +107,7 @@ export default function RootLayout({
         <GoogleAnalytics />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(PROFESSIONAL_SERVICE_JSON_LD) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(PROFESSIONAL_SERVICE_JSON_LD).replace(/</g, '\\u003c') }}
         />
         <style
           dangerouslySetInnerHTML={{

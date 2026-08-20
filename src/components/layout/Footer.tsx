@@ -39,14 +39,7 @@ export default function Footer() {
         </li>
       </ul>
       <p className="text-sm text-gray-600 dark:text-gray-400 text-center m-0">
-        <a
-          href="https://creativecommons.org/licenses/by/4.0/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
-        >
-          ©<span suppressHydrationWarning>{new Date().getFullYear()}</span> Charles Jones - CC BY 4.0
-        </a>
+        ©<span suppressHydrationWarning>{new Date().getFullYear()}</span> Charles Jones. All rights reserved.
       </p>
     </footer>
   );

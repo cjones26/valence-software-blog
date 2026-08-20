@@ -20,17 +20,15 @@ export default function Hero() {
       <div className="relative max-w-6xl mx-auto px-6 pt-10 pb-14 md:pt-24 md:pb-24 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center">
         <div className="relative z-10 order-last lg:order-none">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-slate-900 dark:text-white">
-            Custom software for businesses that outgrew the spreadsheet
+            Technology that fits the way your business works
           </h1>
           <p className="mt-6 text-[17px] md:text-xl leading-relaxed text-slate-700 dark:text-vs-muted max-w-xl">
-            I build the custom software, integrations, and automations that
-            off-the-shelf tools usually cannot handle, based on about fifteen
-            years of engineering work, most of it in banking and financial
-            services out of Charlotte, North Carolina, including time in
-            information security. You deal with me directly on every project,
-            not an account manager.
+            I&apos;m Charles Jones, the technology consultant and principal
+            engineer behind Valence Software. I help businesses improve
+            workflows, connect systems, make sound technology decisions, and
+            build custom software when existing products no longer fit.
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
             <Link
               href="#contact"
               onClick={scrollToAnchorOnClick('contact')}
@@ -41,7 +39,7 @@ export default function Hero() {
             <Link
               href="#services"
               onClick={scrollToAnchorOnClick('services')}
-              className="inline-flex items-center justify-center rounded-lg px-6 py-3 text-[17px] font-semibold text-slate-900 dark:text-white border border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors"
+              className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-transparent px-6 py-3 text-[17px] font-semibold text-slate-800 transition-colors hover:border-slate-400 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-vs-blue dark:border-slate-600 dark:text-white dark:hover:border-slate-500 dark:hover:bg-white/5"
             >
               Services
             </Link>

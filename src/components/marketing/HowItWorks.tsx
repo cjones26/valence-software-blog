@@ -1,27 +1,25 @@
-import { FiTag, FiFileText, FiUser, FiLifeBuoy } from 'react-icons/fi';
-import type { IconType } from 'react-icons';
 import Reveal from './Reveal';
 
-const principles: Array<{ title: string; body: string; icon: IconType }> = [
+const steps = [
   {
-    title: 'A fixed price.',
-    body: 'You get a number before work starts, based on a scope agreed upon up front, rather than an open meter that keeps running the longer things take.',
-    icon: FiTag,
+    title: 'Initial conversation',
+    body: 'You explain what is taking too much time, where information gets lost, or what is getting in the way. I will ask questions and give you a straightforward assessment of whether I can help.',
   },
   {
-    title: 'A written statement of work.',
-    body: 'What is out of scope gets written as carefully as what is in scope.',
-    icon: FiFileText,
+    title: 'Understand the business',
+    body: 'I learn how the work is currently performed, who is involved, what systems are already in place, and what constraints the business needs to work within.',
   },
   {
-    title: 'You work with me.',
-    body: 'No account manager, and no junior engineer quietly doing the work after someone senior sold it.',
-    icon: FiUser,
+    title: 'Evaluate the options',
+    body: 'I consider whether the right answer is improving an existing system, selecting a better product, connecting tools, or building something custom.',
   },
   {
-    title: 'Support after launch.',
-    body: 'Every project includes a warranty period, with ongoing support available after that.',
-    icon: FiLifeBuoy,
+    title: 'Define the engagement',
+    body: 'You receive a written scope describing the recommendations or work, what is excluded, the price, and the expected delivery plan.',
+  },
+  {
+    title: 'Deliver and support',
+    body: 'I carry out the agreed work, keep you involved, and provide documentation and support appropriate to the engagement.',
   },
 ];
 
@@ -36,33 +34,31 @@ export default function HowItWorks() {
         <Reveal>
           <h2
             id="how-it-works-heading"
-            className="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white"
           >
             How I work
           </h2>
         </Reveal>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
-          {principles.map(({ title, body, icon: Icon }, index) => (
-            <Reveal
-              key={title}
-              delayMs={index * 60}
-              className="flex flex-row items-start gap-3"
-            >
-              <Icon
-                className="w-6 h-6 shrink-0 mt-1 text-vs-blue dark:text-vs-cyan"
+        <ol className="mt-12 ml-4 max-w-3xl border-l border-slate-300 list-none dark:border-white/20">
+          {steps.map(({ title, body }, index) => (
+            <li key={title} className="relative pb-10 pl-10 last:pb-0">
+              <span
+                className="absolute -left-[18px] top-0 flex h-9 w-9 items-center justify-center rounded-full bg-vs-bg-deep text-sm font-bold text-white ring-8 ring-slate-100 dark:bg-vs-cyan dark:text-vs-bg-deep dark:ring-vs-bg"
                 aria-hidden="true"
-              />
-              <div>
+              >
+                {index + 1}
+              </span>
+              <Reveal>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">
                   {title}
                 </h3>
                 <p className="mt-2 text-[17px] leading-relaxed text-slate-700 dark:text-vs-muted">
                   {body}
                 </p>
-              </div>
-            </Reveal>
+              </Reveal>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

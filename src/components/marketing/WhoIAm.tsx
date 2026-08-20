@@ -15,27 +15,26 @@ export default function WhoIAm() {
         <Reveal>
           <h2
             id="who-i-am-heading"
-            className="text-3xl md:text-5xl font-bold tracking-tight text-white"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-white"
           >
-            Who I am
+            Direct by design
           </h2>
         </Reveal>
         <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 lg:items-center">
           <Reveal>
             <p className="text-[17px] md:text-lg leading-relaxed text-vs-muted">
-              I am{' '}
-              <span className="font-semibold text-white">Charles Jones</span>. I
-              have spent fifteen years building software, most of it in banking
-              and financial services. Before that, I spent seven years at a
-              managed service provider, running IT for small and mid-size
-              businesses. I want to understand how your business actually runs
-              before I start building anything for it.
+              I&apos;m <span className="font-semibold text-white">Charles Jones</span>,
+              the technology consultant and principal engineer behind Valence Software. I work directly
+              with each client—from understanding the problem and defining the
+              scope through recommending, implementing, and supporting the
+              solution. There is no sales handoff, account manager, or junior
+              delivery team.
             </p>
           </Reveal>
-          <Reveal delayMs={100}>
+          <Reveal>
             <p className="border-l-4 border-vs-cyan pl-6 text-xl md:text-2xl font-medium leading-snug text-white">
-              I ran IT for small businesses before I ever built software for a
-              living, and it still shapes how I approach a project today.
+              If a project requires expertise or capacity beyond what I can
+              responsibly provide, I will say so before we begin.
             </p>
           </Reveal>
         </div>

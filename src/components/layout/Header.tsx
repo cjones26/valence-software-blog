@@ -19,51 +19,51 @@ export default function Header({ searchQuery = '', onSearchChange, onReset }: He
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
-    <header className="border-b border-blue-200 dark:border-slate-700 transition-all duration-300">
-      <div className="px-6 py-3 md:py-4">
-        {/* Top Row */}
-        <div className="flex items-center justify-between gap-3 md:gap-4">
-          {/* Logo and Title */}
+    <header className="border-b border-blue-200 dark:border-slate-700 transition-colors duration-300">
+      <div className="px-3 py-3 min-[360px]:px-4 sm:px-6 md:py-4">
+        <div className="flex items-center justify-between gap-2 min-[360px]:gap-3 md:gap-4">
           <Link
             href="/"
-            className="group flex items-center gap-2 shrink-0"
+            className="group flex min-w-0 items-center gap-1.5 min-[360px]:gap-2"
             onClick={onReset}
           >
-            <div className="relative w-12 h-12 md:w-12 md:h-12 rounded-lg group-hover:scale-105 transition-all shadow-sm flex items-center justify-center p-0 overflow-hidden">
-              {/* Background layer with gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 dark:from-cyan-500 dark:to-blue-500 transition-colors duration-300"></div>
-
-              {/* Logo layer */}
-              <div className="relative w-full h-full flex items-center justify-center">
-                <div className="relative w-8 h-8 flex items-center justify-center translate-x-[1px] translate-y-[2px]">
-                  <Image
-                    src="/valence-logo-800-800.png"
-                    alt="Valence Software"
-                    width={32}
-                    height={32}
-                    className="w-full h-full object-contain scale-[1.4]"
-                    quality={90}
-                    priority
-                    sizes="32px"
-                  />
-                </div>
-              </div>
-            </div>
-            <p className="hidden sm:block text-lg md:text-xl lg:text-2xl font-bold tracking-tight m-0 leading-none text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-              Valence Software
-            </p>
+            <span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg shadow-sm transition-transform group-hover:scale-105 min-[360px]:h-11 min-[360px]:w-11 md:h-12 md:w-12">
+              <span className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 dark:from-cyan-500 dark:to-blue-500" />
+              <span className="relative flex h-8 w-8 translate-x-px translate-y-0.5 items-center justify-center">
+                <Image
+                  src="/valence-logo-800-800.png"
+                  alt=""
+                  width={32}
+                  height={32}
+                  className="h-full w-full scale-[1.4] object-contain"
+                  quality={90}
+                  priority
+                  sizes="32px"
+                />
+              </span>
+            </span>
+            <span className="flex min-w-0 flex-col justify-center">
+              <span className="text-base font-bold leading-none tracking-tight whitespace-nowrap text-gray-900 transition-colors group-hover:text-blue-600 min-[360px]:text-lg md:text-xl lg:text-2xl dark:text-white dark:group-hover:text-blue-400">
+                Valence Software
+              </span>
+            </span>
           </Link>
 
-          {/* Navigation and Utilities */}
-          <div className="flex items-center gap-3 md:gap-4 shrink-0">
-            {/* Navigation Links */}
-            <nav className="flex items-center gap-3 md:gap-4">
+          <div className="flex shrink-0 items-center gap-1.5 min-[360px]:gap-2 md:gap-4">
+            <nav aria-label="Primary" className="hidden md:flex items-center gap-3 lg:gap-4">
               <Link
                 href="/#services"
                 onClick={scrollToAnchorOnClick('services')}
-                className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
+                className="hidden lg:block text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
               >
                 Services
+              </Link>
+              <Link
+                href="/#how-it-works"
+                onClick={scrollToAnchorOnClick('how-it-works')}
+                className="hidden lg:block text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
+              >
+                How I work
               </Link>
               <Link
                 href="/about"
@@ -81,19 +81,14 @@ export default function Header({ searchQuery = '', onSearchChange, onReset }: He
               <Link
                 href="/#contact"
                 onClick={scrollToAnchorOnClick('contact')}
-                className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap"
               >
                 Contact
               </Link>
             </nav>
 
-            {/* Divider */}
-            <div className="hidden sm:block w-px h-5 bg-gray-300 dark:bg-gray-600" />
-
-            {/* Utilities */}
-            <div className="flex items-center gap-2">
-              {/* Desktop Search Bar */}
-              {onSearchChange && (
+            {onSearchChange && (
+              <>
                 <div className="hidden md:block">
                   <SearchInput
                     value={searchQuery}
@@ -101,24 +96,19 @@ export default function Header({ searchQuery = '', onSearchChange, onReset }: He
                     className="w-48"
                   />
                 </div>
-              )}
-
-              {/* Mobile Search Toggle */}
-              {onSearchChange && (
                 <div className="md:hidden">
                   <SearchToggle
                     isOpen={isSearchOpen}
                     onToggle={() => setIsSearchOpen(!isSearchOpen)}
                   />
                 </div>
-              )}
+              </>
+            )}
 
-              <LightDarkToggle />
-            </div>
+            <LightDarkToggle />
           </div>
         </div>
 
-        {/* Mobile Search Bar - Slides Down */}
         {onSearchChange && (
           <div
             className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
