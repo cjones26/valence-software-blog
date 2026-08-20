@@ -1,0 +1,266 @@
+@reference "../../../../globals.css";
+
+.content {
+  @apply prose prose-slate max-w-none md:prose-lg;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  text-rendering: optimizeLegibility;
+}
+
+.content p {
+  @apply text-slate-800;
+  line-height: 1.8;
+  margin-bottom: 1.25em;
+}
+
+.content h1 :global(a.anchor),
+.content h2 :global(a.anchor),
+.content h3 :global(a.anchor),
+.content h4 :global(a.anchor),
+.content h5 :global(a.anchor),
+.content h6 :global(a.anchor) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.content h1 :global(a.anchor:hover),
+.content h2 :global(a.anchor:hover),
+.content h3 :global(a.anchor:hover),
+.content h4 :global(a.anchor:hover),
+.content h5 :global(a.anchor:hover),
+.content h6 :global(a.anchor:hover) {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  @apply text-slate-900;
+  font-family: 'Fixel', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.content :not(pre) > code {
+  @apply bg-slate-100 px-1.5 py-0.5 text-slate-900 rounded;
+  font-size: 0.9em;
+}
+
+.content pre {
+  @apply rounded-lg border border-slate-200;
+  overflow-x: auto;
+  background-color: var(--shiki-light-bg);
+  color: var(--shiki-light);
+}
+
+:global(.dark) .content pre {
+  background-color: var(--shiki-dark-bg);
+  color: var(--shiki-dark);
+}
+
+.content pre code {
+  background: transparent;
+  color: inherit;
+}
+
+.content pre code span {
+  color: var(--shiki-light);
+}
+
+:global(.dark) .content pre code span {
+  color: var(--shiki-dark);
+}
+
+.content a {
+  @apply text-blue-600;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.content a:hover {
+  @apply text-blue-700;
+}
+
+.content img {
+  @apply mx-auto;
+}
+
+.content :global(.callout) {
+  @apply my-6 rounded-xl border p-5 shadow-sm;
+}
+
+.content :global(.callout-title) {
+  @apply mb-3 flex items-center gap-2 text-base font-semibold;
+}
+
+.content :global(.callout-content) {
+  @apply text-[16.5px] leading-relaxed;
+}
+
+.content :global(.callout-content) > p:first-child {
+  @apply mt-0;
+}
+
+.content :global(.callout-content) > p:last-child {
+  @apply mb-0;
+}
+
+.content :global(.callout-note) {
+  @apply border-blue-200/60 bg-blue-50/80;
+}
+
+.content :global(.callout-note) :global(.callout-title) {
+  @apply text-blue-900;
+}
+
+.content :global(.callout-note) :global(.callout-content) {
+  @apply text-slate-700;
+}
+
+.content :global(.callout-info) {
+  @apply border-cyan-200/60 bg-cyan-50/80;
+}
+
+.content :global(.callout-info) :global(.callout-title) {
+  @apply text-cyan-900;
+}
+
+.content :global(.callout-info) :global(.callout-content) {
+  @apply text-slate-700;
+}
+
+.content :global(.callout-tip) {
+  @apply border-emerald-200/60 bg-emerald-50/80;
+}
+
+.content :global(.callout-tip) :global(.callout-title) {
+  @apply text-emerald-900;
+}
+
+.content :global(.callout-tip) :global(.callout-content) {
+  @apply text-slate-700;
+}
+
+.content :global(.callout-warning) {
+  @apply border-amber-200/60 bg-amber-50/80;
+}
+
+.content :global(.callout-warning) :global(.callout-title) {
+  @apply text-amber-900;
+}
+
+.content :global(.callout-warning) :global(.callout-content) {
+  @apply text-slate-700;
+}
+
+.content :global(.callout-caution) {
+  @apply border-orange-200/60 bg-orange-50/80;
+}
+
+.content :global(.callout-caution) :global(.callout-title) {
+  @apply text-orange-900;
+}
+
+.content :global(.callout-caution) :global(.callout-content) {
+  @apply text-slate-700;
+}
+
+.content :global(.callout-danger) {
+  @apply border-red-200/60 bg-red-50/80;
+}
+
+.content :global(.callout-danger) :global(.callout-title) {
+  @apply text-red-900;
+}
+
+.content :global(.callout-danger) :global(.callout-content) {
+  @apply text-slate-700;
+}
+
+:global(.dark) .content {
+  @apply prose-invert;
+}
+
+:global(.dark) .content p {
+  @apply text-slate-200;
+}
+
+:global(.dark) .content h1,
+:global(.dark) .content h2,
+:global(.dark) .content h3,
+:global(.dark) .content h4,
+:global(.dark) .content h5,
+:global(.dark) .content h6 {
+  @apply text-slate-50;
+}
+
+:global(.dark) .content :not(pre) > code {
+  @apply bg-slate-800 text-slate-100;
+}
+
+:global(.dark) .content pre {
+  @apply border-slate-700;
+}
+
+:global(.dark) .content a {
+  @apply text-blue-400;
+}
+
+:global(.dark) .content a:hover {
+  @apply text-blue-300;
+}
+
+:global(.dark) .content :global(.callout-content) {
+  @apply text-slate-300;
+}
+
+:global(.dark) .content :global(.callout-note) {
+  @apply border-blue-800/40 bg-blue-950/20;
+}
+
+:global(.dark) .content :global(.callout-note) :global(.callout-title) {
+  @apply text-blue-200;
+}
+
+:global(.dark) .content :global(.callout-info) {
+  @apply border-cyan-800/40 bg-cyan-950/20;
+}
+
+:global(.dark) .content :global(.callout-info) :global(.callout-title) {
+  @apply text-cyan-200;
+}
+
+:global(.dark) .content :global(.callout-tip) {
+  @apply border-emerald-800/40 bg-emerald-950/20;
+}
+
+:global(.dark) .content :global(.callout-tip) :global(.callout-title) {
+  @apply text-emerald-200;
+}
+
+:global(.dark) .content :global(.callout-warning) {
+  @apply border-amber-800/40 bg-amber-950/20;
+}
+
+:global(.dark) .content :global(.callout-warning) :global(.callout-title) {
+  @apply text-amber-200;
+}
+
+:global(.dark) .content :global(.callout-caution) {
+  @apply border-orange-800/40 bg-orange-950/20;
+}
+
+:global(.dark) .content :global(.callout-caution) :global(.callout-title) {
+  @apply text-orange-200;
+}
+
+:global(.dark) .content :global(.callout-danger) {
+  @apply border-red-800/40 bg-red-950/20;
+}
+
+:global(.dark) .content :global(.callout-danger) :global(.callout-title) {
+  @apply text-red-200;
+}

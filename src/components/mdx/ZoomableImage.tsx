@@ -5,6 +5,7 @@ import Image from 'next/image';
 import mediumZoom from 'medium-zoom';
 import type { Zoom } from 'medium-zoom';
 import { useTheme } from '@/components/ui/ThemeProvider';
+import './ZoomableImage.css';
 
 interface ZoomableImageProps {
   src: string;

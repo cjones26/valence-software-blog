@@ -7,6 +7,7 @@ import Tag from '@/components/blog/Tag';
 import PostCoverImage from '@/components/blog/PostCoverImage';
 import { BlogPostingSchema, BreadcrumbSchema } from '@/components/analytics/StructuredData';
 import { formatDateSafe } from '@/lib/dateUtils';
+import styles from './post.module.css';
 
 const Comments = dynamic(() => import('@/components/ui/Comments'), {
   loading: () => <div className="mt-8 text-center text-gray-500">Loading comments...</div>,
@@ -70,7 +71,7 @@ export default async function PostPage({ params }: PostPageProps) {
         )}
       </div>
 
-      <article className="prose dark:prose-invert">
+      <article className={styles.content}>
         <MDXContent code={post.body.code} />
       </article>
       <section
