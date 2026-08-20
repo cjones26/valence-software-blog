@@ -11,7 +11,7 @@ const goodFit = [
   'Replacing outdated vendor software',
   'Turning a spreadsheet into a real app',
   'Extending existing software',
-  'Building customer-facing sites and portals',
+  'Building internal or customer-facing tools',
 ];
 
 export default function Contact() {
@@ -55,18 +55,20 @@ export default function Contact() {
             <p className="mt-6 text-[17px] text-vs-muted">Virginia Beach, Virginia</p>
           </Reveal>
 
-          <Reveal delayMs={100}>
-            <p className="text-sm font-semibold text-white/70">
-              A good fit usually looks like
-            </p>
-            <ul className="mt-3 space-y-2.5">
-              {goodFit.map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-[15px] text-vs-muted">
-                  <FiCheck className="mt-1 h-3.5 w-3.5 shrink-0 text-vs-cyan" aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+          <Reveal delayMs={100} className="lg:flex lg:justify-center">
+            <div>
+              <p className="text-sm font-semibold text-white/70">
+                A good fit usually looks like
+              </p>
+              <ul className="mt-3 space-y-2.5">
+                {goodFit.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-[15px] text-vs-muted">
+                    <FiCheck className="mt-1 h-3.5 w-3.5 shrink-0 text-vs-cyan" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Reveal>
         </div>
       </div>
