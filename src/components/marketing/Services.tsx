@@ -1,4 +1,4 @@
-import { FiRefreshCw, FiTool, FiLink2, FiPackage, FiShield, FiBarChart2 } from 'react-icons/fi';
+import { FiRefreshCw, FiTool, FiLink2, FiSettings, FiShield, FiBarChart2 } from 'react-icons/fi';
 import type { IconType } from 'react-icons';
 import Reveal from './Reveal';
 
@@ -19,9 +19,9 @@ const services: Array<{ title: string; body: string; icon: IconType }> = [
     icon: FiLink2,
   },
   {
-    title: 'Extend software you already own',
-    body: 'Often the software you already own handles most of the job already, and just needs the last piece built around it rather than a whole new system.',
-    icon: FiPackage,
+    title: 'Pick up where the vendor stops',
+    body: 'Sometimes the platform cannot do what you need, or the vendor will not build it for you. I build the piece they leave out, so you are not stuck waiting on someone who already told you no.',
+    icon: FiSettings,
   },
   {
     title: 'See what is actually happening',
