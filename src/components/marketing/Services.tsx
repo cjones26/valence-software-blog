@@ -1,36 +1,36 @@
-import { FiRefreshCw, FiTool, FiLink2, FiPackage, FiShield, FiBarChart2 } from 'react-icons/fi';
+import { FiRefreshCw, FiTool, FiLink2, FiSettings, FiShield, FiBarChart2 } from 'react-icons/fi';
 import type { IconType } from 'react-icons';
 import Reveal from './Reveal';
 
 const services: Array<{ title: string; body: string; icon: IconType }> = [
   {
     title: 'Replace manual processes',
-    body: 'I build the automation that gets rid of the two-day monthly report and the data that keeps getting typed into two different systems by hand.',
+    body: 'I build the automation that gets rid of the two-day monthly report and the data that gets typed into two systems by hand.',
     icon: FiRefreshCw,
   },
   {
     title: 'Build the software you need',
-    body: 'I replace the spreadsheet nobody really trusts with an actual application that has permissions, a history, and a plan for when its owner moves on. Sometimes that is a tool for your team, and sometimes it is something your own customers use directly, like a portal or a booking site.',
+    body: "I replace the spreadsheet nobody really trusts with a real application - permissions, history, and all - whether that's a tool for your team or something your own customers use directly.",
     icon: FiTool,
   },
   {
     title: 'Connect systems that do not talk',
-    body: 'I build the integration that gets two pieces of software talking to each other, so nobody on your team has to keep retyping the same information twice.',
+    body: 'I build the integration that gets two systems talking, so nobody on your team retypes the same information twice.',
     icon: FiLink2,
   },
   {
-    title: 'Extend software you already own',
-    body: 'Often the software you already own handles most of the job already, and just needs the last piece built around it rather than a whole new system.',
-    icon: FiPackage,
+    title: 'Pick up where the vendor stops',
+    body: "When a vendor won't build it, or their platform simply can't, I build the piece they leave out.",
+    icon: FiSettings,
   },
   {
     title: 'See what is actually happening',
-    body: 'I build the dashboard or report that pulls your real numbers into one place, so you can see what is going on without digging through spreadsheets or asking around.',
+    body: "I build the dashboard that pulls your real numbers into one place, so you stop digging through spreadsheets to find out what's going on.",
     icon: FiBarChart2,
   },
   {
     title: 'Work that holds up under scrutiny',
-    body: 'I have spent years building audited, security-conscious software for banks and financial companies. That habit of making things hold up under real scrutiny carries over if you answer to inspectors, insurers, or a prime contractor.',
+    body: 'Years building audited, security-conscious software for banks taught me to make things hold up under real scrutiny - from inspectors to a prime contractor.',
     icon: FiShield,
   },
 ];
@@ -58,10 +58,12 @@ export default function Services() {
               delayMs={index * 60}
               className="flex flex-row items-start gap-3 text-left sm:flex-col sm:items-center sm:gap-0 sm:text-center"
             >
-              <Icon
-                className="w-6 h-6 shrink-0 mt-1 sm:mt-0 text-vs-blue dark:text-vs-cyan"
-                aria-hidden="true"
-              />
+              <div className="shrink-0 flex items-center justify-center w-11 h-11 rounded-full bg-vs-blue/10 dark:bg-vs-cyan/10">
+                <Icon
+                  className="w-5 h-5 text-vs-blue dark:text-vs-cyan"
+                  aria-hidden="true"
+                />
+              </div>
               <div>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white sm:mt-3">
                   {title}
