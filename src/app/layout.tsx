@@ -102,6 +102,7 @@ export default function RootLayout({
     >
       <head>
         <link rel="preload" href="/fonts/FixelText-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/FixelText-Medium.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/FixelText-SemiBold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/FixelText-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <GoogleAnalytics />
