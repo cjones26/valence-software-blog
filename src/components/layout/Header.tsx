@@ -112,7 +112,7 @@ export default function Header() {
           <div id="mobile-navigation" className="lg:hidden">
             <nav
               aria-label="Mobile"
-              className="border-t border-slate-200 pb-3 dark:border-slate-700"
+              className="border-t border-slate-200 dark:border-slate-700"
             >
               <div className="grid gap-1 py-2">
                 {navigation.map((item) => (
@@ -129,11 +129,8 @@ export default function Header() {
                   </Link>
                 ))}
               </div>
-              <div className="flex h-[48px] items-center justify-between border-t border-slate-200 px-4 dark:border-slate-700">
-                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                  Appearance
-                </span>
-                <LightDarkToggle className="justify-end" />
+              <div className="border-t border-slate-200 py-2 dark:border-slate-700">
+                <LightDarkToggle label="Appearance" />
               </div>
             </nav>
           </div>
