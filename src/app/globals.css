@@ -14,9 +14,9 @@
   --color-vs-muted: #b8cbd6;
   --background-image-vs-feature-section: linear-gradient(
     135deg,
-    #102532 0%,
-    var(--color-vs-bg) 55%,
-    #10222d 100%
+    #15313f 0%,
+    #102630 55%,
+    #142d38 100%
   );
 }
 
