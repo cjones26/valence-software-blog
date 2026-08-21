@@ -16,22 +16,23 @@ export default function SearchInput({ value, onChange, className = '' }: SearchI
 
   return (
     <div className={`relative ${className}`}>
-      <FiSearch className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-xs" />
+      <FiSearch className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
       <input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="Search..."
+        placeholder="Search posts..."
         aria-label="Search posts"
-        className="w-full pl-8 pr-8 py-1.5 text-sm border border-gray-300 dark:border-slate-700 rounded-md bg-white dark:bg-slate-900/50 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 transition-colors"
+        className="h-[44px] w-full rounded-lg border border-slate-300 bg-white pl-10 pr-11 text-sm text-slate-950 placeholder-slate-400 transition-colors focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:placeholder-slate-500 dark:focus:border-cyan-400 dark:focus:ring-cyan-400/20"
       />
       {value && (
         <button
+          type="button"
           onClick={handleClear}
-          className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors"
+          className="absolute right-0 top-0 flex h-[44px] w-[44px] items-center justify-center text-slate-400 transition-colors hover:text-slate-700 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-blue-600 dark:text-slate-500 dark:hover:text-slate-200 dark:focus-visible:outline-cyan-400"
           aria-label="Clear search"
         >
-          <FiX className="text-xs" />
+          <FiX className="h-4 w-4" />
         </button>
       )}
     </div>

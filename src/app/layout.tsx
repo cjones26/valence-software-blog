@@ -112,10 +112,10 @@ export default function RootLayout({
         <style
           dangerouslySetInnerHTML={{
             __html: `
-              :root{--background:#ffffff;--foreground:#0f172a;--subtle-gradient:linear-gradient(180deg,#ffffff 0%,#fafafa 100%)}
-              .dark{--background:#0a0a0a;--foreground:#f1f5f9;--subtle-gradient:linear-gradient(180deg,#0a0a0a 0%,#050505 100%);color-scheme:dark}
+              :root{--background:#f8fafc;--foreground:#0f172a;--subtle-gradient:linear-gradient(180deg,#f8fafc 0%,#ffffff 55%,#f8fafc 100%)}
+              .dark{--background:#081219;--foreground:#f1f5f9;--subtle-gradient:linear-gradient(180deg,#081219 0%,#0c1a24 55%,#081219 100%);color-scheme:dark}
               html{font-size:1.15rem;overflow-x:hidden;background:var(--subtle-gradient);min-height:100dvh}
-              body{font-family:'Fixel',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;min-height:100dvh;color:var(--foreground);overflow-x:hidden;letter-spacing:0.01em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+              body{background:var(--subtle-gradient);font-family:'Fixel',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.7;min-height:100dvh;color:var(--foreground);overflow-x:hidden;letter-spacing:0.01em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
               @supports (font-variation-settings:normal){body{font-feature-settings:'kern' 1,'liga' 1,'calt' 1}}
             `,
           }}
