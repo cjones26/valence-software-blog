@@ -5,6 +5,7 @@ import type Fuse from 'fuse.js';
 import Header from './Header';
 import Footer from './Footer';
 import BlogList from '../blog/BlogList';
+import SearchInput from '../search/SearchInput';
 
 interface Post {
   url: string;
@@ -110,11 +111,23 @@ export default function BlogLayout({
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header
-        searchQuery={searchInput}
-        onSearchChange={handleSearchChange}
-        onReset={handleSearchReset}
-      />
+      <Header />
+      <section
+        aria-labelledby="blog-heading"
+        className="mx-auto flex w-full max-w-3xl flex-col gap-5 px-4 pt-8 sm:flex-row sm:items-center sm:justify-between md:px-6 md:pt-10"
+      >
+        <h1
+          id="blog-heading"
+          className="text-3xl font-bold tracking-tight text-slate-950 dark:text-white"
+        >
+          Blog
+        </h1>
+        <SearchInput
+          value={searchInput}
+          onChange={handleSearchChange}
+          className="w-full sm:w-72"
+        />
+      </section>
       <BlogList
         posts={displayPosts}
         currentPage={activePage}

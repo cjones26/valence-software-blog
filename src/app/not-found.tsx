@@ -20,7 +20,7 @@ export default function NotFound() {
   const popularTags = Array.from(allTags).slice(0, 8);
 
   return (
-    <PageLayout>
+    <PageLayout showBackToBlog={false}>
       <div className="flex flex-col items-center justify-center py-16 px-4">
         <div className="text-center max-w-2xl">
           <h1 className="text-6xl md:text-8xl font-bold text-gray-900 dark:text-white mb-4">

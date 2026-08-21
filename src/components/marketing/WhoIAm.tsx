@@ -5,7 +5,7 @@ export default function WhoIAm() {
     <section
       id="who-i-am"
       aria-labelledby="who-i-am-heading"
-      className="relative overflow-hidden bg-vs-bg-deep border-t border-white/10"
+      className="relative overflow-hidden border-t border-white/10 bg-vs-bg-deep dark:bg-[linear-gradient(135deg,#102532_0%,#0c1a24_55%,#10222d_100%)]"
     >
       <div
         className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full opacity-20 blur-3xl bg-[linear-gradient(135deg,var(--color-vs-blue),var(--color-vs-cyan))]"
