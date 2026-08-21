@@ -12,6 +12,12 @@
   --color-vs-cyan: #13d7df;
   --color-vs-blue: #1a87be;
   --color-vs-muted: #b8cbd6;
+  --background-image-vs-feature-section: linear-gradient(
+    135deg,
+    #102532 0%,
+    var(--color-vs-bg) 55%,
+    #10222d 100%
+  );
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
